@@ -14,6 +14,7 @@
 		41B5525E1CEB8FC500B23ED7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41B5525C1CEB8FC500B23ED7 /* Main.storyboard */; };
 		41B552601CEB8FC500B23ED7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41B5525F1CEB8FC500B23ED7 /* Assets.xcassets */; };
 		41B552631CEB8FC500B23ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41B552611CEB8FC500B23ED7 /* LaunchScreen.storyboard */; };
+		7B8839311CEBA17000C9424B /* GameSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8839301CEBA17000C9424B /* GameSetupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		41B5525F1CEB8FC500B23ED7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41B552621CEB8FC500B23ED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		41B552641CEB8FC500B23ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B8839301CEBA17000C9424B /* GameSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSetupViewController.swift; sourceTree = "<group>"; };
+		7B8839321CEBA47100C9424B /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +61,11 @@
 		41B552521CEB8FC500B23ED7 /* WordJive */ = {
 			isa = PBXGroup;
 			children = (
+				7B8839321CEBA47100C9424B /* Pacifico.ttf */,
 				41B552531CEB8FC500B23ED7 /* AppDelegate.swift */,
 				41B552581CEB8FC500B23ED7 /* MasterViewController.swift */,
 				41B5525A1CEB8FC500B23ED7 /* DetailViewController.swift */,
+				7B8839301CEBA17000C9424B /* GameSetupViewController.swift */,
 				41B5525C1CEB8FC500B23ED7 /* Main.storyboard */,
 				41B5525F1CEB8FC500B23ED7 /* Assets.xcassets */,
 				41B552611CEB8FC500B23ED7 /* LaunchScreen.storyboard */,
@@ -142,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B8839311CEBA17000C9424B /* GameSetupViewController.swift in Sources */,
 				41B552541CEB8FC500B23ED7 /* AppDelegate.swift in Sources */,
 				41B552571CEB8FC500B23ED7 /* WordJive.xcdatamodeld in Sources */,
 				41B552591CEB8FC500B23ED7 /* MasterViewController.swift in Sources */,
@@ -297,6 +303,7 @@
 				41B552691CEB8FC500B23ED7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
