@@ -13,7 +13,7 @@ enum BackEndURLs : String {
     case Puzzle = "https://floating-taiga-20677.herokuapp.com/puzzle"
 }
 
-class BackEndRequests : AnyObject, NSURLSessionDelegate, NSURLSessionDataDelegate, NSURLSessionTaskDelegate {
+class BackEndRequests : AnyObject {
     
     var receivedData : NSMutableData?
     class func getCapabilities() {
@@ -35,25 +35,25 @@ class BackEndRequests : AnyObject, NSURLSessionDelegate, NSURLSessionDataDelegat
         
     }
     
-    @objc func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
-        
-        receivedData?.appendData(data)
-        
-    }
-    
-    @objc func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
-        guard let receivedData = receivedData else
-        {
-            self.receivedData = nil
-            return
-        }
-        if (error != nil){
-            
-            let data = NSJSONSerialization.dataWithJSONObject(receivedData, options: NSJSONWritingOptions.PrettyPrinted) as? [String:String]
-            
-        }
-        
-    }
+//    @objc func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
+//        
+//        receivedData?.appendData(data)
+//        
+//    }
+//    
+//    @objc func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
+//        guard let receivedData = receivedData else
+//        {
+//            self.receivedData = nil
+//            return
+//        }
+//        if (error != nil){
+//            
+////            let data = NSJSONSerialization.dataWithJSONObject(receivedData, options: NSJSONWritingOptions.PrettyPrinted) as? [String:String]
+//            
+//        }
+//        
+//    }
     
 }
 
