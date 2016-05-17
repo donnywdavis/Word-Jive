@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class GameSetupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var context: NSManagedObjectContext?
+    var entity: NSEntityDescription?
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -24,6 +27,8 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         playButton.layer.cornerRadius = 7.0
         
@@ -45,9 +50,31 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     @IBAction func playButtonPushed(sender: UIButton) {
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity!.name!, inManagedObjectContext: context!)
         
+        // If appropriate, configure the new managed object.
+        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+        for index in 0...settingsArray.count {
+            let indexPath = NSIndexPath(forRow: index, inSection: 1)
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SettingsTableViewCell {
+                if cell.settingTextField.text != "" {
+                    newManagedObject.setValue(cell.settingTextField.text, forKey: settingsArray[index]["title"]!)
+                } else {
+                    newManagedObject.setValue(cell.settingTextField.placeholder, forKey: settingsArray[index]["title"]!)
+                }
+            }
+        }
         
-        
+        // Save the context.
+        do {
+            try context!.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //print("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
