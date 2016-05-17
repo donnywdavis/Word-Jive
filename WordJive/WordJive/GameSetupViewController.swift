@@ -31,6 +31,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         
         
         playButton.layer.cornerRadius = 7.0
+        playButton.titleLabel?.font = UIFont (name: "Pacifico", size: 24)
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
 
