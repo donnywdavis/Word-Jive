@@ -15,9 +15,13 @@ enum BackEndURLs : String {
 
 class BackEndRequests : AnyObject {
     
+    weak static var delegate: CapabilitiesDelegate?
+    
     var receivedData : NSMutableData?
+    
+    
     class func getCapabilities() {
-        
+        startSession(BackEndURLs.Capabilities)
     }
     
     class func getPuzzle() {
@@ -27,33 +31,42 @@ class BackEndRequests : AnyObject {
     private class func startSession(urlString: BackEndURLs) {
         
         let url = NSURL(string: urlString.rawValue)
-        let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let urlSession = NSURLSession(configuration: urlSessionConfig)
+        let urlRequest = NSMutableURLRequest(URL: url!)
+        let session = NSURLSession.sharedSession()
         
-        let task = urlSession.dataTaskWithURL(url!)
+        let task = session.dataTaskWithRequest(urlRequest) {
+            (data, response, error) -> Void in
+            
+            let httpResponse = response as! NSHTTPURLResponse
+            let statusCode = httpResponse.statusCode
+            let urlValue = httpResponse.URL?.absoluteString
+            
+            if (statusCode == 200) {
+                parseData(data!, urlString: urlValue!)
+            }
+        }
+        
         task.resume()
         
     }
     
-//    @objc func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
-//        
-//        receivedData?.appendData(data)
-//        
-//    }
-//    
-//    @objc func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
-//        guard let receivedData = receivedData else
-//        {
-//            self.receivedData = nil
-//            return
-//        }
-//        if (error != nil){
-//            
-////            let data = NSJSONSerialization.dataWithJSONObject(receivedData, options: NSJSONWritingOptions.PrettyPrinted) as? [String:String]
-//            
-//        }
-//        
-//    }
+    private class func parseData(data: NSData, urlString: String) {
+        switch urlString {
+        case BackEndURLs.Capabilities.rawValue:
+            do {
+                let parsedData = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [[String: String]]
+                delegate?.availableCapabilities(parsedData!)
+            } catch {
+                print("Uh oh!")
+            }
+            
+        case BackEndURLs.Puzzle.rawValue:
+            break
+            
+        default:
+            break
+        }
+    }
     
 }
 
