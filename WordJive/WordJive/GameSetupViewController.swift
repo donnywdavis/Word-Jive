@@ -9,10 +9,6 @@
 import UIKit
 import CoreData
 
-protocol CapabilitiesDelegate: class {
-    func availableCapabilities(data: [[String: String]])
-}
-
 enum TableSections {
     case Title
     case Options
@@ -108,6 +104,8 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
             abort()
         }
         
+        BackEndRequests.getPuzzle(dataDictionary)
+        
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -123,7 +121,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         case TableSections.Title.hashValue:
             return "Title"
         case TableSections.Options.hashValue:
-            return "Game Options"
+            return "Game options"
         case TableSections.Capabilities.hashValue:
             return "Choose at least one option below"
         default:
