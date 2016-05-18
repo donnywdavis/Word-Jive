@@ -25,6 +25,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 126, height: 41))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "WordJiveTitleIcon")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        
     }
 
     override func viewWillAppear(animated: Bool) {
