@@ -148,10 +148,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnk-3Y-cFv">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnk-3Y-cFv">
                                 <rect key="frame" x="30" y="523" width="540" height="57"/>
                                 <fontDescription key="fontDescription" name="Pacifico" family="Pacifico" pointSize="24"/>
-                                <state key="normal" title="Play!"/>
+                                <state key="normal" title="Play!">
+                                    <color key="titleShadowColor" red="0.75294117647058822" green="0.75686274509803919" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.BorderWidth">
                                         <integer key="value" value="2"/>

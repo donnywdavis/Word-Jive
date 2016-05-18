@@ -9,13 +9,17 @@
 import UIKit
 import CoreData
 
+protocol CapabilitiesDelegate: class {
+    func availableCapabilities(data: [[String: String]])
+}
+
 enum TableSections {
     case Title
     case Options
     case Capabilities
 }
 
-class GameSetupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GameSetupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CapabilitiesDelegate {
     
     var context: NSManagedObjectContext?
     var entity: NSEntityDescription?
@@ -32,15 +36,18 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         ["title": "Max Word Length", "placeholder": 10, "key": "maxWordLength"]]
     
     let capabiliesArray = ["Horizontal", "Vertical", "Angle", "Whatever"]
+    var capabilitiesArray = [[String: String]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        BackEndRequests.getCapabilities()
+        BackEndRequests.delegate = self
         
         playButton.layer.cornerRadius = 7.0
-        playButton.layer.borderColor = UIColor(red: (13/255.0), green: (95/255.0), blue: (255/255.0), alpha: 1.0).CGColor
+        playButton.layer.borderColor = UIColor(red: (192/255.0), green: (193/255.0), blue: (192/255.0), alpha: 1.0).CGColor
         playButton.titleLabel?.font = UIFont (name: "Pacifico", size: 24)
+        playButton.enabled = false
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
 
@@ -95,6 +102,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
             //print("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
+        
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -129,7 +137,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         case TableSections.Options.hashValue:
             return slidersArray.count
         case TableSections.Capabilities.hashValue:
-            return capabiliesArray.count
+            return capabilitiesArray.count
         default:
             return 0
         }
@@ -170,7 +178,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     
     func configureCapabilitiesCell(indexPath: NSIndexPath) -> CapabilitiesTableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CapabilitiesCell", forIndexPath: indexPath) as? CapabilitiesTableViewCell
-        cell?.capabilityLabel.text = capabiliesArray[indexPath.row]
+        cell?.capabilityLabel.text = capabilitiesArray[indexPath.row]["name"]
         return cell!
     }
     
@@ -184,6 +192,16 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
                 cell?.accessoryType = .None
             }
         }
+    }
+    
+    
+    // MARK: CapabilitiesDelegate
+    
+    func availableCapabilities(data: [[String : String]]) {
+        capabilitiesArray = data
+        playButton.layer.borderColor = UIColor(red: (13/255.0), green: (95/255.0), blue: (255/255.0), alpha: 1.0).CGColor
+        playButton.enabled = true
+        tableView.reloadData()
     }
 
 }
