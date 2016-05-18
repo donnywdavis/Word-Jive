@@ -25,7 +25,7 @@ class BackEndRequests : AnyObject {
     }
     
     class func getPuzzle() {
-        
+        startSession(BackEndURLs.Puzzle)
     }
     
     private class func startSession(urlString: BackEndURLs) {
@@ -33,6 +33,12 @@ class BackEndRequests : AnyObject {
         let url = NSURL(string: urlString.rawValue)
         let urlRequest = NSMutableURLRequest(URL: url!)
         let session = NSURLSession.sharedSession()
+        
+        if urlString == .Puzzle {
+            urlRequest.HTTPMethod = "POST"
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        }
         
         let task = session.dataTaskWithRequest(urlRequest) {
             (data, response, error) -> Void in

@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate, CapabilitiesDelegate {
 
     var window: UIWindow?
 
@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
         let controller = masterNavigationController.topViewController as! MasterViewController
         controller.managedObjectContext = self.managedObjectContext
+        
+        BackEndRequests.delegate = self
+        BackEndRequests.getCapabilities()
+        
         return true
     }
 
@@ -124,6 +128,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 abort()
             }
         }
+    }
+    
+    
+    // MARK: - CapabilitiesDelegate
+    
+    func availableCapabilities(data: [[String : String]]) {
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
+        let controller = masterNavigationController.topViewController as! MasterViewController
+        controller.capabilitiesArray = data
     }
 
 }

@@ -13,12 +13,15 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
+    var capabilitiesArray: [[String: String]]? = nil
+    
+//    let gradientLayer = CAGradientLayer()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
+        
 //        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MasterViewController.insertNewObject(_:)))
 //        self.navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
@@ -32,6 +35,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         imageView.image = image
         navigationItem.titleView = imageView
         
+//        tableView.backgroundColor = UIColor.clearColor()
+        tableView.tableFooterView = UIView(frame: CGRectZero)
+        navigationController?.navigationBar.barTintColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
+
+//        gradientLayer.frame = view.bounds
+//        let color1 = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
+//        let color2 = UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0)
+//        gradientLayer.colors = [color1, color2]
+//        gradientLayer.locations = [0.0, 0.5]
+////        view.layer.addSublayer(gradientLayer)
+//        tableView.layer.addSublayer(gradientLayer)
+        
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -44,25 +59,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Dispose of any resources that can be recreated.
     }
 
-//    func addGameOptions() {
-//        let context = self.fetchedResultsController.managedObjectContext
-//        let entity = self.fetchedResultsController.fetchRequest.entity!
-//        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
-//             
-//        // If appropriate, configure the new managed object.
-//        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-//        newManagedObject.setValue(NSDate(), forKey: "timeStamp")
-//             
-//        // Save the context.
-//        do {
-//            try context.save()
-//        } catch {
-//            // Replace this implementation with code to handle the error appropriately.
-//            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            //print("Unresolved error \(error), \(error.userInfo)")
-//            abort()
-//        }
-//    }
 
     // MARK: - Segues
 
@@ -80,6 +76,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let optionsVC = (segue.destinationViewController as! UINavigationController).topViewController as! GameSetupViewController
             optionsVC.context = self.fetchedResultsController.managedObjectContext
             optionsVC.entity = self.fetchedResultsController.fetchRequest.entity!
+            optionsVC.capabilitiesArray = capabilitiesArray!
+            optionsVC.navigationController?.popoverPresentationController?.backgroundColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
+        }
+        if segue.identifier == "CreditsSegue" {
+            let creditsVC = (segue.destinationViewController as! UINavigationController).topViewController as! CreditsViewController
+            creditsVC.navigationController?.popoverPresentationController?.backgroundColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
         }
     }
 

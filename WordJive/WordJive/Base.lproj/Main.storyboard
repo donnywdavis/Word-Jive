@@ -97,13 +97,12 @@
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Arm-wq-HPj">
                                             <rect key="frame" x="15" y="0.0" width="550" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                            <color key="textColor" red="0.92941176469999998" green="0.10980392160000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="6S0-TO-JiA"/>
                                 </connections>
@@ -117,15 +116,17 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="wordjive" id="Zdf-7t-Un8">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="3h9-PI-PaQ">
+                            <color key="tintColor" red="0.97647058819999999" green="0.92941176469999998" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="FmA-3C-c9i" kind="popoverPresentation" identifier="settingsSegue" popoverAnchorBarButtonItem="3h9-PI-PaQ" id="hVV-xw-ki9">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="ⓘ" id="0CB-ea-adH">
+                        <barButtonItem key="rightBarButtonItem" image="credits-icon 2" id="0CB-ea-adH">
+                            <color key="tintColor" red="0.97647058819999999" green="0.92941176469999998" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="Efx-KA-0w4" kind="popoverPresentation" popoverAnchorBarButtonItem="0CB-ea-adH" id="HRa-Vi-VAP">
+                                <segue destination="Efx-KA-0w4" kind="popoverPresentation" identifier="CreditsSegue" popoverAnchorBarButtonItem="0CB-ea-adH" id="HRa-Vi-VAP">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -148,12 +149,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnk-3Y-cFv">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnk-3Y-cFv">
                                 <rect key="frame" x="30" y="523" width="540" height="57"/>
                                 <fontDescription key="fontDescription" name="Pacifico" family="Pacifico" pointSize="24"/>
-                                <state key="normal" title="Play!">
-                                    <color key="titleShadowColor" red="0.75294117647058822" green="0.75686274509803919" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <state key="normal" title="Play!"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.BorderWidth">
                                         <integer key="value" value="2"/>
@@ -296,6 +295,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Game Options" id="OmA-Wk-tdi">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Nch-oD-2oS">
+                            <color key="tintColor" red="0.97647058819999999" green="0.92941176469999998" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancelButtonPushed:" destination="23c-Cb-eSF" id="pDv-tJ-RNc"/>
                             </connections>
@@ -392,6 +392,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Credits" id="xfz-g0-2Dg">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="1ZJ-Rw-9yS">
+                            <color key="tintColor" red="0.97647058819999999" green="0.92941176469999998" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="doneAction:" destination="SjO-cJ-WTo" id="CMk-Rg-65p"/>
                             </connections>
@@ -439,6 +440,9 @@
             <point key="canvasLocation" x="1447" y="-1338"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="credits-icon 2" width="25" height="25"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>

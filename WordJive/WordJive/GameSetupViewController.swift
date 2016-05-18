@@ -19,7 +19,7 @@ enum TableSections {
     case Capabilities
 }
 
-class GameSetupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CapabilitiesDelegate {
+class GameSetupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var context: NSManagedObjectContext?
     var entity: NSEntityDescription?
@@ -35,21 +35,21 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         ["title": "Min Word Length", "placeholder": 4, "key": "minWordLength"],
         ["title": "Max Word Length", "placeholder": 10, "key": "maxWordLength"]]
     
-    let capabiliesArray = ["Horizontal", "Vertical", "Angle", "Whatever"]
     var capabilitiesArray = [[String: String]]()
+    var selectedCapabilities = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        BackEndRequests.getCapabilities()
-        BackEndRequests.delegate = self
+
         
         playButton.layer.cornerRadius = 7.0
-        playButton.layer.borderColor = UIColor(red: (192/255.0), green: (193/255.0), blue: (192/255.0), alpha: 1.0).CGColor
-        playButton.titleLabel?.font = UIFont (name: "Pacifico", size: 24)
-        playButton.enabled = false
+        playButton.layer.borderColor = UIColor(red: (13/255.0), green: (95/255.0), blue: (255/255.0), alpha: 1.0).CGColor
+        playButton.titleLabel?.font = UIFont(name: "Pacifico", size: 24)
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        navigationController?.navigationBar.barTintColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
+        navigationController?.navigationBar.tintColor = UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0), NSFontAttributeName: UIFont(name: "Pacifico", size: 24)!]
 
         // Do any additional setup after loading the view.
     }
@@ -68,6 +68,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     
     @IBAction func playButtonPushed(sender: UIButton) {
         let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity!.name!, inManagedObjectContext: context!)
+        var dataDictionary = [String: AnyObject]()
         
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
@@ -87,11 +88,15 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SliderTableViewCell {
                 if cell.valueSlider.value != 0.0 {
                     newManagedObject.setValue(Int(cell.valueSlider.value), forKey: slidersArray[index]["key"]! as! String)
+                    dataDictionary[slidersArray[index]["key"]! as! String] = Int(cell.valueSlider.value)
                 } else {
                     newManagedObject.setValue(slidersArray[index]["placeholder"], forKey: slidersArray[index]["key"]! as! String)
+                    dataDictionary[slidersArray[index]["key"]! as! String] = slidersArray[index]["placeholder"]
                 }
             }
         }
+        
+        dataDictionary["capabilities"] = selectedCapabilities
         
         // Save the context.
         do {
@@ -169,7 +174,11 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     func configureOptionsCell(indexPath: NSIndexPath) -> SliderTableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SliderCell", forIndexPath: indexPath) as? SliderTableViewCell
         cell?.titleLabel.text = slidersArray[indexPath.row]["title"] as? String
-        cell?.valueLabel.text = slidersArray[indexPath.row]["placeholder"] as? String
+        if let sliderValue = slidersArray[indexPath.row]["placeholder"] as? Int {
+            cell?.valueLabel.text = String(sliderValue)
+        } else {
+            cell?.valueLabel.text = ""
+        }
         cell?.valueSlider.maximumValue = slidersArray[indexPath.row]["placeholder"] as! Float
         cell?.valueSlider.minimumValue = 2
         cell?.valueSlider.value = slidersArray[indexPath.row]["placeholder"] as! Float
@@ -188,20 +197,13 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
             
             if cell?.accessoryType.hashValue == UITableViewCellAccessoryType.None.hashValue {
                 cell?.accessoryType = .Checkmark
+                if let capability = capabilitiesArray[indexPath.row]["keyword"] {
+                    selectedCapabilities.append(capability)
+                }
             } else {
                 cell?.accessoryType = .None
             }
         }
-    }
-    
-    
-    // MARK: CapabilitiesDelegate
-    
-    func availableCapabilities(data: [[String : String]]) {
-        capabilitiesArray = data
-        playButton.layer.borderColor = UIColor(red: (13/255.0), green: (95/255.0), blue: (255/255.0), alpha: 1.0).CGColor
-        playButton.enabled = true
-        tableView.reloadData()
     }
 
 }
