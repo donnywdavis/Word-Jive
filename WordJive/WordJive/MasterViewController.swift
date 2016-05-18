@@ -37,7 +37,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Dispose of any resources that can be recreated.
     }
 
-//    func insertNewObject(sender: AnyObject) {
+//    func addGameOptions() {
 //        let context = self.fetchedResultsController.managedObjectContext
 //        let entity = self.fetchedResultsController.fetchRequest.entity!
 //        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
@@ -68,6 +68,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
+        }
+        if segue.identifier == "settingsSegue" {
+            let optionsVC = (segue.destinationViewController as! UINavigationController).topViewController as! GameSetupViewController
+            optionsVC.context = self.fetchedResultsController.managedObjectContext
+            optionsVC.entity = self.fetchedResultsController.fetchRequest.entity!
         }
     }
 
