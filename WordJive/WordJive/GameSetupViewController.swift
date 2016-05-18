@@ -9,6 +9,11 @@
 import UIKit
 import CoreData
 
+enum TableSections {
+    case Options
+    case Capabilities
+}
+
 class GameSetupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var context: NSManagedObjectContext?
@@ -88,11 +93,18 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         return 2
     }
     
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == TableSections.Capabilities.hashValue {
+            return "CHOOSE AT LEAST ONE OPTION BELOW"
+        }
+        return nil
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
+        case TableSections.Options.hashValue:
             return settingsArray.count
-        case 1:
+        case TableSections.Capabilities.hashValue:
             return capabilityArray.count
         default:
             return 0
@@ -102,9 +114,9 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell? = nil
         switch indexPath.section {
-        case 0:
+        case TableSections.Options.hashValue:
             cell = configureOptionsCell(indexPath)
-        case 1:
+        case TableSections.Capabilities.hashValue:
             cell = configureCapabilitiesCell(indexPath)
         default:
             break
@@ -126,11 +138,16 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         return cell!
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return "CHOOSE AT LEAST ONE OPTION BELOW"
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == TableSections.Capabilities.hashValue {
+            let cell = tableView.cellForRowAtIndexPath(tableView.indexPathForSelectedRow!) as? CapabilitiesTableViewCell
+            
+            if cell?.accessoryType.hashValue == UITableViewCellAccessoryType.None.hashValue {
+                cell?.accessoryType = .Checkmark
+            } else {
+                cell?.accessoryType = .None
+            }
         }
-        return nil
     }
 
 }
