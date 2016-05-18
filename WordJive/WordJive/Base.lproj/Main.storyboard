@@ -218,7 +218,7 @@
                             <constraint firstItem="Vnk-3Y-cFv" firstAttribute="top" secondItem="dXO-Z2-Uxz" secondAttribute="bottom" constant="8" symbolic="YES" id="vnm-Ru-3Bx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Game Setup" id="OmA-Wk-tdi">
+                    <navigationItem key="navigationItem" title="Game Options" id="OmA-Wk-tdi">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Nch-oD-2oS">
                             <connections>
                                 <action selector="cancelButtonPushed:" destination="23c-Cb-eSF" id="pDv-tJ-RNc"/>
