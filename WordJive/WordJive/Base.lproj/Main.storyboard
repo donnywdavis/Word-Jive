@@ -168,7 +168,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="451"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="gameSetupCell" id="EtL-Zp-kTW" customClass="SettingsTableViewCell" customModule="WordJive" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="gameSetupCell" id="EtL-Zp-kTW" customClass="SettingsTableViewCell" customModule="WordJive" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EtL-Zp-kTW" id="bLt-Yr-vu3">
@@ -198,6 +198,29 @@
                                         <connections>
                                             <outlet property="settingLabel" destination="gcZ-Ti-ql5" id="wcY-Ay-K61"/>
                                             <outlet property="settingTextField" destination="Gce-Nd-7Nq" id="Qpn-y7-ifw"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CapabilitiesCell" id="7Vo-kC-SQA" customClass="CapabilitiesTableViewCell" customModule="WordJive" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Vo-kC-SQA" id="fj4-94-dCe">
+                                            <rect key="frame" x="0.0" y="0.0" width="561" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capability" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cew-gW-tfR">
+                                                    <rect key="frame" x="8" y="11" width="83" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Cew-gW-tfR" firstAttribute="leading" secondItem="fj4-94-dCe" secondAttribute="leadingMargin" id="9ai-Hn-Q7U"/>
+                                                <constraint firstItem="Cew-gW-tfR" firstAttribute="centerY" secondItem="fj4-94-dCe" secondAttribute="centerY" id="vXv-u1-55Y"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="capabilityLabel" destination="Cew-gW-tfR" id="tav-t6-Leq"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

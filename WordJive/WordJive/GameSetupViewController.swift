@@ -24,6 +24,8 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         ["title": "Words", "placeholder": "10", "key": "words"],
         ["title": "Min Word Length", "placeholder": "4", "key": "minWordLength"],
         ["title": "Max Word Length", "placeholder": "10", "key": "maxWordLength"]]
+    
+    let capabilityArray = ["Horizontal", "Vertical", "Angle", "Whatever"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,17 +84,53 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: Table view stuff
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingsArray.count
+        switch section {
+        case 0:
+            return settingsArray.count
+        case 1:
+            return capabilityArray.count
+        default:
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("gameSetupCell", forIndexPath: indexPath) as? SettingsTableViewCell
-        
-        cell?.settingLabel.text = settingsArray[indexPath.row]["title"]
-        cell?.settingTextField.placeholder = settingsArray[indexPath.row]["placeholder"]
+        var cell: UITableViewCell? = nil
+        switch indexPath.section {
+        case 0:
+            cell = configureOptionsCell(indexPath)
+        case 1:
+            cell = configureCapabilitiesCell(indexPath)
+        default:
+            break
+        }
         
         return cell!
+    }
+    
+    func configureOptionsCell(indexPath: NSIndexPath) -> SettingsTableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("gameSetupCell", forIndexPath: indexPath) as? SettingsTableViewCell
+        cell?.settingLabel.text = settingsArray[indexPath.row]["title"]
+        cell?.settingTextField.placeholder = settingsArray[indexPath.row]["placeholder"]
+        return cell!
+    }
+    
+    func configureCapabilitiesCell(indexPath: NSIndexPath) -> CapabilitiesTableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("CapabilitiesCell", forIndexPath: indexPath) as? CapabilitiesTableViewCell
+        cell?.capabilityLabel.text = capabilityArray[indexPath.row]
+        return cell!
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "CHOOSE AT LEAST ONE OPTION BELOW"
+        }
+        return nil
     }
 
 }
