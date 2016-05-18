@@ -18,12 +18,12 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var tableView: UITableView!
     
     let settingsArray = [
-        ["title": "Title", "placeholder": "Title"],
-        ["title": "Width", "placeholder": "20"],
-        ["title": "Height", "placeholder": "20"],
-        ["title": "Words", "placeholder": "10"],
-        ["title": "Min Word Length", "placeholder": "4"],
-        ["title": "Max Word Length", "placeholder": "10"]]
+        ["title": "Title", "placeholder": "Title", "key": "title"],
+        ["title": "Width", "placeholder": "20", "key": "width"],
+        ["title": "Height", "placeholder": "20", "key": "height"],
+        ["title": "Words", "placeholder": "10", "key": "words"],
+        ["title": "Min Word Length", "placeholder": "4", "key": "minWordLength"],
+        ["title": "Max Word Length", "placeholder": "10", "key": "maxWordLength"]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,12 +56,12 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
         for index in 0...settingsArray.count {
-            let indexPath = NSIndexPath(forRow: index, inSection: 1)
+            let indexPath = NSIndexPath(forRow: index, inSection: 0)
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SettingsTableViewCell {
                 if cell.settingTextField.text != "" {
                     newManagedObject.setValue(cell.settingTextField.text, forKey: settingsArray[index]["title"]!)
                 } else {
-                    newManagedObject.setValue(cell.settingTextField.placeholder, forKey: settingsArray[index]["title"]!)
+                    newManagedObject.setValue(settingsArray[index]["placeholder"], forKey: settingsArray[index]["key"]!)
                 }
             }
         }
