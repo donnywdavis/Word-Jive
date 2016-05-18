@@ -31,6 +31,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         
         
         playButton.layer.cornerRadius = 7.0
+        playButton.layer.borderColor = UIColor(red: (13/255.0), green: (95/255.0), blue: (255/255.0), alpha: 1.0).CGColor
         playButton.titleLabel?.font = UIFont (name: "Pacifico", size: 24)
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
