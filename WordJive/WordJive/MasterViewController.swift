@@ -38,12 +38,16 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
+        tableView.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+        
 //        tableView.backgroundColor = UIColor.clearColor()
 //        gradientLayer.frame = view.bounds
 //        let color1 = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
 //        let color2 = UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0)
-//        gradientLayer.colors = [color1, color2]
-//        gradientLayer.locations = [0.0, 0.5]
+//        let color3 = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
+//        let color4 = UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0)
+//        gradientLayer.colors = [color1, color2, color3, color4]
+//        gradientLayer.locations = [0.0, 0.25, 0.5, 0.75]
 ////        view.layer.addSublayer(gradientLayer)
 //        tableView.layer.addSublayer(gradientLayer)
         
@@ -109,8 +113,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> GamesTableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("GameCell", forIndexPath: indexPath) as! GamesTableViewCell
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
         self.configureCell(cell, withObject: object)
         return cell
@@ -137,8 +141,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
-    func configureCell(cell: UITableViewCell, withObject object: NSManagedObject) {
-        cell.textLabel!.text = object.valueForKey("title")!.description
+    func configureCell(cell: GamesTableViewCell, withObject object: NSManagedObject) {
+        cell.setupCell(object)
     }
 
     // MARK: - Fetched results controller
@@ -202,7 +206,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .Delete:
                 tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
             case .Update:
-                self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, withObject: anObject as! NSManagedObject)
+                self.configureCell((tableView.cellForRowAtIndexPath(indexPath!)! as! GamesTableViewCell), withObject: anObject as! NSManagedObject)
             case .Move:
                 tableView.moveRowAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
         }
