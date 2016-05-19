@@ -17,13 +17,14 @@ enum TableSections {
 
 class GameSetupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var fetchedResultsController: NSFetchedResultsController?
     var context: NSManagedObjectContext?
     var entity: NSEntityDescription?
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    let textFieldsArray = [["title": "Title", "placeholder": "Title", "key": "title"]]
+    let textFieldsArray = [["title": "Title", "placeholder": "Game", "key": "title"]]
     let slidersArray = [
         ["title": "Width", "placeholder": 20, "key": "width"],
         ["title": "Height", "placeholder": 20, "key": "height"],
@@ -37,6 +38,8 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        context = fetchedResultsController?.managedObjectContext
+        entity = fetchedResultsController?.fetchRequest.entity!
         
         playButton.layer.cornerRadius = 7.0
         playButton.layer.borderColor = UIColor(red: (13/255.0), green: (95/255.0), blue: (255/255.0), alpha: 1.0).CGColor
@@ -71,7 +74,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
                 if cell.settingTextField.text != "" {
                     newManagedObject.setValue(cell.settingTextField.text, forKey: textFieldsArray[index]["key"]!)
                 } else {
-                    newManagedObject.setValue(textFieldsArray[index]["placeholder"], forKey: textFieldsArray[index]["key"]!)
+                    newManagedObject.setValue(cell.settingTextField.placeholder, forKey: textFieldsArray[index]["key"]!)
                 }
             }
         }
@@ -162,8 +165,19 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     
     func configureTitleCell(indexPath: NSIndexPath) -> SettingsTableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell", forIndexPath: indexPath) as? SettingsTableViewCell
+        let numberOfSections = fetchedResultsController?.sections?.count ?? 0
+        var numberOfGames = 0
+        for section in 0...numberOfSections-1 {
+            let sectionInfo = fetchedResultsController?.sections![section]
+            if let games = sectionInfo?.numberOfObjects {
+                numberOfGames += games
+            }
+        }
+        if numberOfGames == 0 {
+            numberOfGames = 1
+        }
         cell?.settingLabel.text = textFieldsArray[indexPath.row]["title"]
-        cell?.settingTextField.placeholder = textFieldsArray[indexPath.row]["placeholder"]
+        cell?.settingTextField.placeholder = "\(textFieldsArray[indexPath.row]["placeholder"]!) \(numberOfGames)"
         return cell!
     }
     

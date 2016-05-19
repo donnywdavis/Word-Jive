@@ -64,7 +64,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-            let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+                let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
@@ -73,8 +73,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         if segue.identifier == "settingsSegue" {
             let optionsVC = (segue.destinationViewController as! UINavigationController).topViewController as! GameSetupViewController
-            optionsVC.context = self.fetchedResultsController.managedObjectContext
-            optionsVC.entity = self.fetchedResultsController.fetchRequest.entity!
+            optionsVC.fetchedResultsController = self.fetchedResultsController
             optionsVC.capabilitiesArray = capabilitiesArray!
             optionsVC.navigationController?.popoverPresentationController?.backgroundColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
         }
