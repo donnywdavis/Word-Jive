@@ -9,16 +9,14 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
-
-
-    var gameItem: AnyObject? {
+    
+@IBOutlet weak var detailDescriptionLabel: UILabel!
+    
+    let word:NSMutableString = ""
+var gameItem: AnyObject? {
         didSet {
             // Update the view.
-            self.configureView()
-        }
-    }
+            self.configureView()}}
 
     func configureView() {
         // Update the user interface for the detail item.
@@ -34,7 +32,7 @@ class DetailViewController: UIViewController {
         
         let width = 11
         let height = 20
-        
+
             
             //if something is input by user
             if ((1<width) && (1<height) &&
@@ -94,15 +92,19 @@ class DetailViewController: UIViewController {
         
         let placeOnView = recognizer.locationInView(self.view)
         
+        
         switch recognizer.state {
         case .Changed:
             if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
                 subViewTouched.backgroundColor = .redColor()
-                print(subViewTouched)
+                word.appendString(subViewTouched.text!)
+                print(word)
                 print(placeOnView) }
         default:
             break
         }
+        //append text from the touched subview to an array.
+        
     }
 
     
