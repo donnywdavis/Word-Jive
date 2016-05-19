@@ -41,8 +41,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         context = fetchedResultsController?.managedObjectContext
         entity = fetchedResultsController?.fetchRequest.entity!
         
-        playButton.layer.cornerRadius = 7.0
-//        playButton.layer.borderColor = UIColor(red: (13/255.0), green: (95/255.0), blue: (255/255.0), alpha: 1.0).CGColor
+        playButton.layer.cornerRadius = 10.0
         playButton.layer.borderColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0).CGColor
         playButton.titleLabel?.font = UIFont(name: "Pacifico", size: 24)
         
@@ -120,10 +119,8 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case TableSections.Title.hashValue:
-            return "Title"
         case TableSections.Options.hashValue:
-            return "Game options"
+            return "Puzzle layout"
         case TableSections.Capabilities.hashValue:
             return "Choose at least one option below"
         default:
@@ -132,7 +129,21 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25.0
+        if section == 0 {
+            return 0.0
+        } else {
+            return 35.0
+        }
+    }
+    
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let title = UILabel()
+        title.textColor = UIColor.whiteColor()
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = title.textColor
+        header.textLabel?.textAlignment = .Center
+        header.contentView.backgroundColor = UIColor(red: (197/255.0), green: (44/255.0), blue: (0/255.0), alpha: 1.0)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -180,7 +191,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
             numberOfGames = 1
         }
         cell?.settingLabel.text = textFieldsArray[indexPath.row]["title"]
-        cell?.settingTextField.placeholder = "\(textFieldsArray[indexPath.row]["placeholder"]!) \(numberOfGames)"
+        cell?.settingTextField.placeholder = "\(textFieldsArray[indexPath.row]["placeholder"]!) \(numberOfGames + 1)"
         return cell!
     }
     
@@ -210,6 +221,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
             
             if cell?.accessoryType.hashValue == UITableViewCellAccessoryType.None.hashValue {
                 cell?.accessoryType = .Checkmark
+//                cell?.accessoryView?.tintColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
                 if let capability = capabilitiesArray[indexPath.row]["keyword"] {
                     selectedCapabilities.append(capability)
                 }
