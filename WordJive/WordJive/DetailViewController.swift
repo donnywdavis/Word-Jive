@@ -32,8 +32,8 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
    
-        var width = 2
-        var height = 2
+        let width = 10
+        let height = 2
         
             
             //if something is input by user
@@ -62,7 +62,9 @@ class DetailViewController: UIViewController {
                 }
                 
             }
-            
+        
+        
+        
     
     
     self.configureView()
