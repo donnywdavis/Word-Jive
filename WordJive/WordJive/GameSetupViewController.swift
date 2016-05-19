@@ -168,10 +168,12 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell", forIndexPath: indexPath) as? SettingsTableViewCell
         let numberOfSections = fetchedResultsController?.sections?.count ?? 0
         var numberOfGames = 0
-        for section in 0...numberOfSections-1 {
-            let sectionInfo = fetchedResultsController?.sections![section]
-            if let games = sectionInfo?.numberOfObjects {
-                numberOfGames += games
+        if numberOfSections != 0 {
+            for section in 0...numberOfSections-1 {
+                let sectionInfo = fetchedResultsController?.sections![section]
+                if let games = sectionInfo?.numberOfObjects {
+                    numberOfGames += games
+                }
             }
         }
         if numberOfGames == 0 {
