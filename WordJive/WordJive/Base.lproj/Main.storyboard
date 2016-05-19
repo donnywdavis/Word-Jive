@@ -55,7 +55,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
+                    <navigationItem key="navigationItem" title="Game" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
                     </connections>
@@ -152,7 +152,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnk-3Y-cFv">
                                 <rect key="frame" x="30" y="523" width="540" height="57"/>
                                 <fontDescription key="fontDescription" name="Pacifico" family="Pacifico" pointSize="24"/>
-                                <state key="normal" title="Play!"/>
+                                <state key="normal" title="Play!">
+                                    <color key="titleColor" red="0.92941176469999998" green="0.10980392160000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.BorderWidth">
                                         <integer key="value" value="2"/>
@@ -231,6 +233,7 @@
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vAP-Kw-Scr">
                                                     <rect key="frame" x="207" y="7" width="387" height="31"/>
+                                                    <color key="minimumTrackTintColor" red="0.92941176469999998" green="0.10980392160000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="valueSliderAction:" destination="v6W-z4-BOI" eventType="valueChanged" id="B2a-Lc-p9q"/>
                                                     </connections>

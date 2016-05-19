@@ -35,10 +35,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         imageView.image = image
         navigationItem.titleView = imageView
         
-//        tableView.backgroundColor = UIColor.clearColor()
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        navigationController?.navigationBar.barTintColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
-
+        
+//        tableView.backgroundColor = UIColor.clearColor()
 //        gradientLayer.frame = view.bounds
 //        let color1 = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
 //        let color2 = UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0)
@@ -65,7 +64,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-            let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+                let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
@@ -74,8 +73,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         if segue.identifier == "settingsSegue" {
             let optionsVC = (segue.destinationViewController as! UINavigationController).topViewController as! GameSetupViewController
-            optionsVC.context = self.fetchedResultsController.managedObjectContext
-            optionsVC.entity = self.fetchedResultsController.fetchRequest.entity!
+            optionsVC.fetchedResultsController = self.fetchedResultsController
             optionsVC.capabilitiesArray = capabilitiesArray!
             optionsVC.navigationController?.popoverPresentationController?.backgroundColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
         }
@@ -94,6 +92,20 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        if let object = sectionInfo.objects?[0] as? NSManagedObject {
+            switch object.valueForKey("completed") as! Bool {
+            case false:
+                return "Active games"
+            case true:
+                return "Completed games"
+            }
+        } else {
+            return ""
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -144,12 +156,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-       let sortDescriptor = NSSortDescriptor(key: "title", ascending: false)
-             fetchRequest.sortDescriptors = [sortDescriptor]
+        let sortDescriptor1 = NSSortDescriptor(key: "completed", ascending: true)
+        let sortDescriptor2 = NSSortDescriptor(key: "title", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: "completed", cacheName: "Master")
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
