@@ -32,8 +32,8 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         
-        let width = 9
-        let height = 5
+        let width = 11
+        let height = 20
         
             
             //if something is input by user
@@ -72,11 +72,11 @@ class DetailViewController: UIViewController {
 
         func labelCreator(a:Int, b:Int){
             //convert int to float
-            let a10 = CGFloat(a*35)
-            let b10 = CGFloat(b*35)
+            let a10 = CGFloat(a*25)
+            let b10 = CGFloat(b*25+50)
             
             //create unique frame on the view using these inputs
-            let labelPlacement = CGRectMake(a10, b10, CGFloat(30), CGFloat(30))
+            let labelPlacement = CGRectMake(a10, b10, CGFloat(20), CGFloat(20))
             
             //create a label with the frame
             let newLabel = UILabel.init(frame: labelPlacement)
