@@ -10,6 +10,7 @@
 		410AE90E1CEC086E00F57029 /* CapabilitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AE90D1CEC086E00F57029 /* CapabilitiesTableViewCell.swift */; };
 		4170800D1CECDAF3008E85DC /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4170800C1CECDAF3008E85DC /* SliderTableViewCell.swift */; };
 		41B1818C1CEE25AA00FE4005 /* WordJive.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 41B1818B1CEE25AA00FE4005 /* WordJive.mp3 */; };
+		41B181901CEE2D9100FE4005 /* GamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B1818F1CEE2D9100FE4005 /* GamesTableViewCell.swift */; };
 		41B552541CEB8FC500B23ED7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B552531CEB8FC500B23ED7 /* AppDelegate.swift */; };
 		41B552571CEB8FC500B23ED7 /* WordJive.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41B552551CEB8FC500B23ED7 /* WordJive.xcdatamodeld */; };
 		41B552591CEB8FC500B23ED7 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B552581CEB8FC500B23ED7 /* MasterViewController.swift */; };
@@ -28,6 +29,7 @@
 		410AE90D1CEC086E00F57029 /* CapabilitiesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapabilitiesTableViewCell.swift; sourceTree = "<group>"; };
 		4170800C1CECDAF3008E85DC /* SliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
 		41B1818B1CEE25AA00FE4005 /* WordJive.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WordJive.mp3; sourceTree = "<group>"; };
+		41B1818F1CEE2D9100FE4005 /* GamesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesTableViewCell.swift; sourceTree = "<group>"; };
 		41B552501CEB8FC500B23ED7 /* WordJive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordJive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41B552531CEB8FC500B23ED7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41B552561CEB8FC500B23ED7 /* WordJive.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WordJive.xcdatamodel; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				41B5525A1CEB8FC500B23ED7 /* DetailViewController.swift */,
 				8C27F4881CEBB2980098C56D /* BackEndRequests.swift */,
 				7B8839301CEBA17000C9424B /* GameSetupViewController.swift */,
+				41B1818F1CEE2D9100FE4005 /* GamesTableViewCell.swift */,
 				41B5526A1CEBCE4A00B23ED7 /* SettingsTableViewCell.swift */,
 				4170800C1CECDAF3008E85DC /* SliderTableViewCell.swift */,
 				410AE90D1CEC086E00F57029 /* CapabilitiesTableViewCell.swift */,
@@ -173,6 +176,7 @@
 				41B552571CEB8FC500B23ED7 /* WordJive.xcdatamodeld in Sources */,
 				410AE90E1CEC086E00F57029 /* CapabilitiesTableViewCell.swift in Sources */,
 				4170800D1CECDAF3008E85DC /* SliderTableViewCell.swift in Sources */,
+				41B181901CEE2D9100FE4005 /* GamesTableViewCell.swift in Sources */,
 				41B5526D1CEBD21200B23ED7 /* CreditsViewController.swift in Sources */,
 				41B552591CEB8FC500B23ED7 /* MasterViewController.swift in Sources */,
 				41B5526B1CEBCE4A00B23ED7 /* SettingsTableViewCell.swift in Sources */,
