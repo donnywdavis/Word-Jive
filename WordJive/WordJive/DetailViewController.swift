@@ -31,14 +31,14 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-   
-        let width = 10
-        let height = 2
+        
+        let width = 9
+        let height = 5
         
             
             //if something is input by user
-            if ((0<width) && (0<height) &&
-                (width<10) && (height<10)){
+            if ((1<width) && (1<height) &&
+                (width<21) && (height<21)){
                 
                 //change user input to int
                 var x = Int(width)
@@ -88,14 +88,25 @@ class DetailViewController: UIViewController {
         }
     
     
+    @IBAction func lettersTouched(recognizer:UIPanGestureRecognizer) {
+        
+        
+        
+        let placeOnView = recognizer.locationInView(self.view)
+        
+        switch recognizer.state {
+        case .Changed:
+            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
+                subViewTouched.backgroundColor = .redColor()
+                print(subViewTouched)
+                print(placeOnView) }
+        default:
+            break
+        }
+    }
 
     
-    
-    
-    
-    
-    
-    
+
     
     
     override func didReceiveMemoryWarning() {
