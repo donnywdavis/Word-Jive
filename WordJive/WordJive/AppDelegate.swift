@@ -26,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let controller = masterNavigationController.topViewController as! MasterViewController
         controller.managedObjectContext = self.managedObjectContext
         
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.barTintColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
+        navBarAppearance.tintColor = UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0)
+        navBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0), NSFontAttributeName: UIFont(name: "Pacifico", size: 24)!]
+        
         BackEndRequests.delegate = self
         BackEndRequests.getCapabilities()
         

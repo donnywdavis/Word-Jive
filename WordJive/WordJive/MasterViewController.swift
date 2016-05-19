@@ -35,10 +35,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         imageView.image = image
         navigationItem.titleView = imageView
         
-//        tableView.backgroundColor = UIColor.clearColor()
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        navigationController?.navigationBar.barTintColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
-
+        
+//        tableView.backgroundColor = UIColor.clearColor()
 //        gradientLayer.frame = view.bounds
 //        let color1 = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
 //        let color2 = UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0)

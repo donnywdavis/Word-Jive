@@ -43,9 +43,6 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         playButton.titleLabel?.font = UIFont(name: "Pacifico", size: 24)
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        navigationController?.navigationBar.barTintColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
-        navigationController?.navigationBar.tintColor = UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0)
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0), NSFontAttributeName: UIFont(name: "Pacifico", size: 24)!]
 
         // Do any additional setup after loading the view.
     }
@@ -92,6 +89,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
         
+        newManagedObject.setValue(false, forKey: "completed")
         dataDictionary["capabilities"] = selectedCapabilities
         
         // Save the context.
