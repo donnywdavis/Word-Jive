@@ -9,22 +9,17 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+
+class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, CapabilitiesDelegate {
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     var capabilitiesArray: [[String: String]]? = nil
-    
-//    let gradientLayer = CAGradientLayer()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        
-//        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MasterViewController.insertNewObject(_:)))
-//        self.navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -39,28 +34,40 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
         tableView.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
-        
-//        tableView.backgroundColor = UIColor.clearColor()
-//        gradientLayer.frame = view.bounds
-//        let color1 = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
-//        let color2 = UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0)
-//        let color3 = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
-//        let color4 = UIColor(red: (247/255.0), green: (148/255.0), blue: (30/255.0), alpha: 1.0)
-//        gradientLayer.colors = [color1, color2, color3, color4]
-//        gradientLayer.locations = [0.0, 0.25, 0.5, 0.75]
-////        view.layer.addSublayer(gradientLayer)
-//        tableView.layer.addSublayer(gradientLayer)
-        
     }
 
     override func viewWillAppear(animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+        animateTable()
         super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func animateTable() {
+        tableView.reloadData()
+        let cells = tableView.visibleCells
+        
+        for cell in cells {
+            if let cell = cell as? GamesTableViewCell {
+                cell.center.x -= tableView.bounds.width
+            } else {
+                return
+            }
+        }
+        
+        var index = 0
+        for cell in cells {
+            if let cell = cell as? GamesTableViewCell {
+                UIView.animateWithDuration(0.5, delay: (0.05 * Double(index)), options: [], animations: {
+                        cell.center.x += self.tableView.bounds.width
+                    }, completion: nil)
+            }
+            index += 1
+        }
     }
 
 
@@ -89,7 +96,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     // MARK: - Table View
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections?.count ?? 0
     }
@@ -97,6 +104,34 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
+    }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 0 {
+            let footerView = UIView()
+            footerView.backgroundColor = UIColor.clearColor()
+            return footerView
+        } else {
+            return UIView()
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 35.0
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10.0
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let title = UILabel()
+        title.textColor = UIColor.whiteColor()
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = title.textColor
+        header.textLabel?.textAlignment = .Center
+        header.contentView.backgroundColor = UIColor(red: (197/255.0), green: (44/255.0), blue: (0/255.0), alpha: 1.0)
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -215,15 +250,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
-
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-         // In the simplest, most efficient, case, reload the table view.
-         self.tableView.reloadData()
-     }
-     */
+    
+    // MARK: - CapabilitiesDelegate
+    
+    func availableCapabilities(data: [[String : String]]) {
+        capabilitiesArray = data
+    }
 
 }
 
