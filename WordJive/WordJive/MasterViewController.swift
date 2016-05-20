@@ -9,7 +9,8 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+
+class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, CapabilitiesDelegate {
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
@@ -37,12 +38,36 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func viewWillAppear(animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+        animateTable()
         super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func animateTable() {
+        tableView.reloadData()
+        let cells = tableView.visibleCells
+        
+        for cell in cells {
+            if let cell = cell as? GamesTableViewCell {
+                cell.center.x -= tableView.bounds.width
+            } else {
+                return
+            }
+        }
+        
+        var index = 0
+        for cell in cells {
+            if let cell = cell as? GamesTableViewCell {
+                UIView.animateWithDuration(0.5, delay: (0.05 * Double(index)), options: [], animations: {
+                        cell.center.x += self.tableView.bounds.width
+                    }, completion: nil)
+            }
+            index += 1
+        }
     }
 
 
@@ -71,7 +96,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     // MARK: - Table View
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections?.count ?? 0
     }
@@ -80,12 +105,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
-    
-//    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = UIView()
-//        headerView.backgroundColor = UIColor(red: (251/255.0), green: (213/255.0), blue: (98/255.0), alpha: 1.0)
-//        return headerView
-//    }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 {
@@ -230,6 +249,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
+    }
+    
+    // MARK: - CapabilitiesDelegate
+    
+    func availableCapabilities(data: [[String : String]]) {
+        capabilitiesArray = data
     }
 
 }
