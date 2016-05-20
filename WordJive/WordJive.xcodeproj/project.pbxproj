@@ -23,6 +23,8 @@
 		7B8839311CEBA17000C9424B /* GameSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8839301CEBA17000C9424B /* GameSetupViewController.swift */; };
 		8C27F4891CEBB2980098C56D /* BackEndRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C27F4881CEBB2980098C56D /* BackEndRequests.swift */; };
 		9F7A605A1CEBE77D0064717B /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B8839321CEBA47100C9424B /* Pacifico.ttf */; };
+		9FB4B1641CEF5DD100E64390 /* Puzzle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FB4B1621CEF5DD100E64390 /* Puzzle.storyboard */; };
+		9FB4B1661CEF5DF600E64390 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FB4B1651CEF5DF600E64390 /* Words.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		7B8839301CEBA17000C9424B /* GameSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSetupViewController.swift; sourceTree = "<group>"; };
 		7B8839321CEBA47100C9424B /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		8C27F4881CEBB2980098C56D /* BackEndRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackEndRequests.swift; sourceTree = "<group>"; };
+		9FB4B1631CEF5DD100E64390 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Puzzle.storyboard; sourceTree = "<group>"; };
+		9FB4B1651CEF5DF600E64390 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,8 @@
 				410AE90D1CEC086E00F57029 /* CapabilitiesTableViewCell.swift */,
 				41B5526C1CEBD21200B23ED7 /* CreditsViewController.swift */,
 				41B5525C1CEB8FC500B23ED7 /* Main.storyboard */,
+				9FB4B1651CEF5DF600E64390 /* Words.storyboard */,
+				9FB4B1621CEF5DD100E64390 /* Puzzle.storyboard */,
 				41B5525F1CEB8FC500B23ED7 /* Assets.xcassets */,
 				41B552611CEB8FC500B23ED7 /* LaunchScreen.storyboard */,
 				41B552641CEB8FC500B23ED7 /* Info.plist */,
@@ -160,7 +166,9 @@
 				41B552601CEB8FC500B23ED7 /* Assets.xcassets in Resources */,
 				41B5525E1CEB8FC500B23ED7 /* Main.storyboard in Resources */,
 				41B1818C1CEE25AA00FE4005 /* WordJive.mp3 in Resources */,
+				9FB4B1641CEF5DD100E64390 /* Puzzle.storyboard in Resources */,
 				9F7A605A1CEBE77D0064717B /* Pacifico.ttf in Resources */,
+				9FB4B1661CEF5DF600E64390 /* Words.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +210,14 @@
 				41B552621CEB8FC500B23ED7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9FB4B1621CEF5DD100E64390 /* Puzzle.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9FB4B1631CEF5DD100E64390 /* Base */,
+			);
+			name = Puzzle.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
