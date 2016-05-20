@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, CapabilitiesDelegate {
@@ -15,6 +16,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var detailViewController: PuzzleViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     var capabilitiesArray: [[String: String]]? = nil
+    var audioPlayer = AVAudioPlayer()
 
 
     override func viewDidLoad() {
@@ -23,6 +25,16 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PuzzleViewController
+        }
+        
+        if let audioFilePath = NSBundle.mainBundle().pathForResource("WordJive", ofType: "mp3") {
+            let audioURL = NSURL(fileURLWithPath: audioFilePath)
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOfURL: audioURL)
+                audioPlayer.play()
+            } catch {
+                print("Not able to play audio")
+            }
         }
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 126, height: 41))

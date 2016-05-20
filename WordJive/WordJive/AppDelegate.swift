@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -17,17 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-//        if let audioFilePath = NSBundle.mainBundle().pathForResource("WordJive", ofType: "mp3") {
-//            let audioURL = NSURL(fileURLWithPath: audioFilePath)
-//            var audioPlayer = AVAudioPlayer()
-//            do {
-//                audioPlayer = try AVAudioPlayer(contentsOfURL: audioURL)
-//                audioPlayer.play()
-//            } catch {
-//                print("Not able to play audio")
-//            }
-//        }
-        
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController

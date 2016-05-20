@@ -187,11 +187,9 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
                 }
             }
         }
-        if numberOfGames == 0 {
-            numberOfGames = 1
-        }
+        numberOfGames += 1
         cell?.settingLabel.text = textFieldsArray[indexPath.row]["title"]
-        cell?.settingTextField.placeholder = "\(textFieldsArray[indexPath.row]["placeholder"]!) \(numberOfGames + 1)"
+        cell?.settingTextField.placeholder = "\(textFieldsArray[indexPath.row]["placeholder"]!) \(numberOfGames)"
         return cell!
     }
     
@@ -221,7 +219,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
             
             if cell?.accessoryType.hashValue == UITableViewCellAccessoryType.None.hashValue {
                 cell?.accessoryType = .Checkmark
-//                cell?.accessoryView?.tintColor = UIColor(red: (237/255.0), green: (28/255.0), blue: (36/255.0), alpha: 1.0)
+                
                 if let capability = capabilitiesArray[indexPath.row]["keyword"] {
                     selectedCapabilities.append(capability)
                 }
