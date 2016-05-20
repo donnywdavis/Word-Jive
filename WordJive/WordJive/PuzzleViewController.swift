@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  PuzzleViewController.swift
 //  WordJive
 //
 //  Created by Donny Davis on 5/17/16.
@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
-class DetailViewController: UIViewController {
+class PuzzleViewController: UIViewController {
     
 @IBOutlet weak var detailDescriptionLabel: UILabel!
     
-    let word:NSMutableString = ""
+let word:NSMutableString = ""
 var gameItem: AnyObject? {
         didSet {
             // Update the view.
@@ -22,6 +23,10 @@ var gameItem: AnyObject? {
         // Update the user interface for the detail item.
         if let game = self.gameItem {
             navigationController?.navigationItem.title = game.valueForKey("title") as? String
+            
+            // add other items from core data
+            
+            //combine object access - place in viewdidload
         }
     }
 
@@ -30,13 +35,8 @@ var gameItem: AnyObject? {
         // Do any additional setup after loading the view, typically from a nib.
 
         
-        let width = 11
-        let height = 20
-
-            
-            //if something is input by user
-            if ((1<width) && (1<height) &&
-                (width<21) && (height<21)){
+        let width = 2
+        let height = 3
                 
                 //change user input to int
                 var x = Int(width)
@@ -58,10 +58,6 @@ var gameItem: AnyObject? {
                     x = xSub
                     y = y-1
                 }
-                
-            }
-        
-        
         
     
     
@@ -79,24 +75,28 @@ var gameItem: AnyObject? {
             //create a label with the frame
             let newLabel = UILabel.init(frame: labelPlacement)
             
-            //substitute this text for specific index of array and loop through.
+//substitute this text for specific index of array and loop through.
             newLabel.text = "A"
             newLabel.userInteractionEnabled = true
-            self.view.insertSubview(newLabel, atIndex: a)
+            
+            self.view.addSubview(newLabel)
         }
     
     
     @IBAction func lettersTouched(recognizer:UIPanGestureRecognizer) {
         
-        
-        
+        //extract coordinates
         let placeOnView = recognizer.locationInView(self.view)
         
         
         switch recognizer.state {
         case .Changed:
             if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
+               
+                //change to expanding oval
                 subViewTouched.backgroundColor = .redColor()
+              
+                //only append when label firing is unique
                 word.appendString(subViewTouched.text!)
                 print(word)
                 print(placeOnView) }

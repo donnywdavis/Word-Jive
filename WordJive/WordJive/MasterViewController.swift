@@ -12,7 +12,7 @@ import CoreData
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, CapabilitiesDelegate {
 
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: PuzzleViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     var capabilitiesArray: [[String: String]]? = nil
 
@@ -22,7 +22,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PuzzleViewController
         }
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 126, height: 41))
@@ -77,7 +77,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! PuzzleViewController
                 controller.gameItem = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
