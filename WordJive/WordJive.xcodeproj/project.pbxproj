@@ -80,8 +80,28 @@
 		41B552521CEB8FC500B23ED7 /* WordJive */ = {
 			isa = PBXGroup;
 			children = (
-				41B1818B1CEE25AA00FE4005 /* WordJive.mp3 */,
-				7B8839321CEBA47100C9424B /* Pacifico.ttf */,
+				9FB4B1681CEF629000E64390 /* Controllers */,
+				9FB4B1671CEF627A00E64390 /* Views */,
+				9FB4B1691CEF629900E64390 /* Model */,
+				9FB4B16A1CEF62B100E64390 /* Supporting Files */,
+			);
+			path = WordJive;
+			sourceTree = "<group>";
+		};
+		9FB4B1671CEF627A00E64390 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				41B5525C1CEB8FC500B23ED7 /* Main.storyboard */,
+				41B552611CEB8FC500B23ED7 /* LaunchScreen.storyboard */,
+				9FB4B1651CEF5DF600E64390 /* Words.storyboard */,
+				9FB4B1621CEF5DD100E64390 /* Puzzle.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		9FB4B1681CEF629000E64390 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				41B552531CEB8FC500B23ED7 /* AppDelegate.swift */,
 				41B552581CEB8FC500B23ED7 /* MasterViewController.swift */,
 				41B5525A1CEB8FC500B23ED7 /* PuzzleViewController.swift */,
@@ -92,15 +112,27 @@
 				4170800C1CECDAF3008E85DC /* SliderTableViewCell.swift */,
 				410AE90D1CEC086E00F57029 /* CapabilitiesTableViewCell.swift */,
 				41B5526C1CEBD21200B23ED7 /* CreditsViewController.swift */,
-				41B5525C1CEB8FC500B23ED7 /* Main.storyboard */,
-				9FB4B1651CEF5DF600E64390 /* Words.storyboard */,
-				9FB4B1621CEF5DD100E64390 /* Puzzle.storyboard */,
-				41B5525F1CEB8FC500B23ED7 /* Assets.xcassets */,
-				41B552611CEB8FC500B23ED7 /* LaunchScreen.storyboard */,
-				41B552641CEB8FC500B23ED7 /* Info.plist */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		9FB4B1691CEF629900E64390 /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				41B552551CEB8FC500B23ED7 /* WordJive.xcdatamodeld */,
 			);
-			path = WordJive;
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9FB4B16A1CEF62B100E64390 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				41B5525F1CEB8FC500B23ED7 /* Assets.xcassets */,
+				41B1818B1CEE25AA00FE4005 /* WordJive.mp3 */,
+				41B552641CEB8FC500B23ED7 /* Info.plist */,
+				7B8839321CEBA47100C9424B /* Pacifico.ttf */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
