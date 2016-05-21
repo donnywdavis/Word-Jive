@@ -77,7 +77,7 @@ class BackEndRequests : AnyObject {
             
         case BackEndURLs.Puzzle.rawValue:
             do {
-                let parsedData = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [[String: String]]
+                let parsedData = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject]
                 print(parsedData?.description)
             } catch {
                 print("Uh oh!")

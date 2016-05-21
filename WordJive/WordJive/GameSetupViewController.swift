@@ -55,6 +55,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Button actions
 
     @IBAction func cancelButtonPushed(sender: UIBarButtonItem) {
         
@@ -177,19 +178,8 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     
     func configureTitleCell(indexPath: NSIndexPath) -> SettingsTableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TextFieldCell", forIndexPath: indexPath) as? SettingsTableViewCell
-        let numberOfSections = fetchedResultsController?.sections?.count ?? 0
-        var numberOfGames = 0
-        if numberOfSections != 0 {
-            for section in 0...numberOfSections-1 {
-                let sectionInfo = fetchedResultsController?.sections![section]
-                if let games = sectionInfo?.numberOfObjects {
-                    numberOfGames += games
-                }
-            }
-        }
-        numberOfGames += 1
         cell?.settingLabel.text = textFieldsArray[indexPath.row]["title"]
-        cell?.settingTextField.placeholder = "\(textFieldsArray[indexPath.row]["placeholder"]!) \(numberOfGames)"
+        cell?.settingTextField.placeholder = "\(textFieldsArray[indexPath.row]["placeholder"]!) \(getDefaultGameNumber())"
         return cell!
     }
     
@@ -227,6 +217,31 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
                 cell?.accessoryType = .None
             }
         }
+    }
+    
+    // MARK: Helper methods
+    
+    func getDefaultGameNumber() -> Int {
+        let numberOfSections = fetchedResultsController?.sections?.count ?? 0
+        var numberOfGames = 0
+        var titlesArray = [String]()
+        if numberOfSections != 0 {
+            for section in 0...numberOfSections-1 {
+                if let sectionInfo = fetchedResultsController?.sections![section] {
+                    for object in sectionInfo.objects! {
+                        titlesArray.append(object.valueForKey("title") as! String)
+                    }
+                    
+                    numberOfGames += sectionInfo.numberOfObjects
+                }
+            }
+        }
+        numberOfGames += 1
+        if titlesArray.contains("Game \(numberOfGames)") {
+            numberOfGames += 1
+        }
+        
+        return numberOfGames
     }
 
 }
