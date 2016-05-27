@@ -110,6 +110,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     // MARK: - Table View
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        tableView.backgroundView = .None
+        let noGamesLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.size.width, height: tableView.frame.size.height))
+        noGamesLabel.text = "No available games."
+        noGamesLabel.textAlignment = .Center
+        noGamesLabel.textColor = UIColor.whiteColor()
+        noGamesLabel.sizeToFit()
+        
+        if let sectionsCount = self.fetchedResultsController.sections?.count where sectionsCount == 0 {
+            tableView.backgroundView = noGamesLabel
+            tableView.separatorStyle = .None
+        }
+        
         return self.fetchedResultsController.sections?.count ?? 0
     }
 
