@@ -150,7 +150,7 @@ var gameItem: AnyObject? {
             currentWord.appendContentsOf(label.text!)
         }
         print(currentWord)
-        currentWord = ""
+        currentWord.removeAll()
     }
     
     func buildSamplePuzzle(){
