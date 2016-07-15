@@ -14,6 +14,7 @@ class PuzzleViewController: UIViewController {
 @IBOutlet weak var detailDescriptionLabel: UILabel!
     
 var labelArray = [UILabel]()
+var samplePuzzle = [String]()
 var gameItem: AnyObject? {
         didSet {
             // Update the view.
@@ -143,11 +144,15 @@ var gameItem: AnyObject? {
 
     func printLabelArrayContents(){
         for label in labelArray{
-            print(label.text)
+            print(label.text!)
         }
         
     }
     
+    func buildSamplePuzzle(){
+        samplePuzzle = ["A","B","C","D", "E", "F", "G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V", "W","X","Y","Z"]
+        
+    }
 
     
     
