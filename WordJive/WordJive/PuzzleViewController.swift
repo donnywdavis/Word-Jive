@@ -15,6 +15,7 @@ class PuzzleViewController: UIViewController {
     
 var labelArray = [UILabel]()
 var samplePuzzle = [String]()
+var currentWord = ""
 var i = 0
 var gameItem: AnyObject? {
         didSet {
@@ -146,9 +147,10 @@ var gameItem: AnyObject? {
 
     func printLabelArrayContents(){
         for label in labelArray{
-            print(label.text!)
+            currentWord.appendContentsOf(label.text!)
         }
-        
+        print(currentWord)
+        currentWord = ""
     }
     
     func buildSamplePuzzle(){
