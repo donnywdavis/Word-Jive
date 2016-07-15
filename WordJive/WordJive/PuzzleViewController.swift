@@ -15,6 +15,7 @@ class PuzzleViewController: UIViewController {
     
 var labelArray = [UILabel]()
 var samplePuzzle = [String]()
+var i = 0
 var gameItem: AnyObject? {
         didSet {
             // Update the view.
@@ -33,8 +34,7 @@ var gameItem: AnyObject? {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-
+        buildSamplePuzzle()
         
         let width = 10
         let height = 10
@@ -80,11 +80,13 @@ var gameItem: AnyObject? {
             newLabel.accessibilityLabel = "puzzle"
             
 //substitute this text for specific index of array and loop through.
-            newLabel.text = "A"
+            
+            newLabel.text = samplePuzzle[i]
             newLabel.textAlignment = .Center
             newLabel.userInteractionEnabled = true
             newLabel.layer.cornerRadius = 5
             newLabel.clipsToBounds = true
+            i = 1+i
             
             self.view.addSubview(newLabel)
         }
@@ -150,7 +152,13 @@ var gameItem: AnyObject? {
     }
     
     func buildSamplePuzzle(){
-        samplePuzzle = ["A","B","C","D", "E", "F", "G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V", "W","X","Y","Z"]
+        let array = ["A","B","C","D", "E", "F", "G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V", "W","X","Y","Z"]
+        samplePuzzle = array
+        samplePuzzle.appendContentsOf(array)
+        samplePuzzle.appendContentsOf(array)
+        samplePuzzle.appendContentsOf(array)
+        samplePuzzle.appendContentsOf(array)
+        samplePuzzle.appendContentsOf(array)
         
     }
 
