@@ -83,6 +83,7 @@ var gameItem: AnyObject? {
 //substitute this text for specific index of array and loop through.
             
             newLabel.text = samplePuzzle[i]
+            newLabel.font = UIFont.systemFontOfSize(20)
             newLabel.textAlignment = .Center
             newLabel.userInteractionEnabled = true
             newLabel.layer.cornerRadius = 5
@@ -154,7 +155,7 @@ var gameItem: AnyObject? {
     }
     
     func buildSamplePuzzle(){
-        let array = ["A","B","C","D", "E", "F", "G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V", "W","X","Y","Z"]
+        let array = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
         samplePuzzle = array
         samplePuzzle.appendContentsOf(array)
         samplePuzzle.appendContentsOf(array)
