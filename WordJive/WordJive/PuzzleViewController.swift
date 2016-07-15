@@ -13,7 +13,7 @@ class PuzzleViewController: UIViewController {
     
 @IBOutlet weak var detailDescriptionLabel: UILabel!
     
-let word:NSMutableString = ""
+var labelArray = [UILabel]()
 var gameItem: AnyObject? {
         didSet {
             // Update the view.
@@ -35,8 +35,8 @@ var gameItem: AnyObject? {
         // Do any additional setup after loading the view, typically from a nib.
 
         
-        let width = 2
-        let height = 3
+        let width = 10
+        let height = 10
                 
                 //change user input to int
                 var x = Int(width)
@@ -75,9 +75,15 @@ var gameItem: AnyObject? {
             //create a label with the frame
             let newLabel = UILabel.init(frame: labelPlacement)
             
+            //create tag for label
+            newLabel.accessibilityLabel = "puzzle"
+            
 //substitute this text for specific index of array and loop through.
             newLabel.text = "A"
+            newLabel.textAlignment = .Center
             newLabel.userInteractionEnabled = true
+            newLabel.layer.cornerRadius = 5
+            newLabel.clipsToBounds = true
             
             self.view.addSubview(newLabel)
         }
@@ -90,16 +96,44 @@ var gameItem: AnyObject? {
         
         
         switch recognizer.state {
+        case .Began:
+            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
+
+            //change to expanding oval
+            subViewTouched.backgroundColor = .redColor()
+            subViewTouched.textColor = .whiteColor()
+            
+            //only append when label firing is unique
+                if labelArray.last != subViewTouched{
+                    labelArray.append(subViewTouched)}
+            print(placeOnView) }
+
+        
         case .Changed:
             if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
                
                 //change to expanding oval
                 subViewTouched.backgroundColor = .redColor()
+                subViewTouched.textColor = .whiteColor()
               
                 //only append when label firing is unique
-                word.appendString(subViewTouched.text!)
-                print(word)
+                if labelArray.last != subViewTouched{
+                    labelArray.append(subViewTouched)}
                 print(placeOnView) }
+            
+            
+        case .Ended:
+            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
+                
+                //change to expanding oval
+                subViewTouched.backgroundColor = .clearColor()
+                subViewTouched.textColor = .blackColor()
+                
+                //only append when label firing is unique
+                if labelArray.last != subViewTouched{
+                    labelArray.append(subViewTouched)}
+                printLabelArrayContents()
+            }
         default:
             break
         }
@@ -107,6 +141,12 @@ var gameItem: AnyObject? {
         
     }
 
+    func printLabelArrayContents(){
+        for label in labelArray{
+            print(label.text)
+        }
+        
+    }
     
 
     
