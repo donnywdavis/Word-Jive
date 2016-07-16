@@ -192,10 +192,17 @@ class PuzzleViewController: UIViewController {
     
     func arrivalAnimation(){
         for subViews in view.subviews{
-            UIView.animateWithDuration(0.25, animations: {
+            UIView.animateWithDuration(0.1, animations: {
                 subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
             })
         }
+        for subViews in view.subviews{
+            UIView.animateWithDuration(0.75, animations: {
+                subViews.transform = CGAffineTransformMakeRotation(0.0)
+            })
+        }
+        
+        
     }
     
     
