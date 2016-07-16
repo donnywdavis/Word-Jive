@@ -182,33 +182,35 @@ class PuzzleViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
     func correctAnimation(){
         for label in labelArray{
-            UIView.animateWithDuration(1.0, animations: {
+            UIView.animateWithDuration(1.0,
+                                       delay: 0.0,
+                                       usingSpringWithDamping: 0.2,
+                                       initialSpringVelocity: 5,
+                                       options: UIViewAnimationOptions.CurveEaseOut,
+                                       animations: {
                 label.frame.size.height = 23
                 label.frame.size.width = 23
-            })
+                                        }, completion: nil)
+            }
         }
-    }
+    
     
     
     func arrivalAnimation(){
 
         for subViews in view.subviews{
-            UIView.animateWithDuration(0.01, animations: {
+            UIView.animateWithDuration(0.01,
+                                       animations: {
                 subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
             })
         }
         for subViews in view.subviews{
             UIView.animateWithDuration(0.50,
-                                       delay: 0.0,
-                                       usingSpringWithDamping: 0.2,
-                                       initialSpringVelocity: 5,
-                                       options: UIViewAnimationOptions.CurveEaseOut,
                                        animations: {
                 subViews.transform = CGAffineTransformMakeRotation(0.0)
             }, completion: nil)
