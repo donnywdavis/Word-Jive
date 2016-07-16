@@ -211,7 +211,7 @@ class PuzzleViewController: UIViewController {
         for subViews in view.subviews{
             UIView.animateWithDuration(1.0,
                         animations: {
-                        subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
+                        subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
             })
         }
         for subViews in view.subviews{
