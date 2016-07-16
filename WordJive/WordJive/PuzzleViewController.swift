@@ -66,6 +66,7 @@ var gameItem: AnyObject? {
     
     
     self.configureView()
+    arrivalAnimation()
 }
 
         func labelCreator(a:Int, b:Int){
@@ -132,6 +133,7 @@ var gameItem: AnyObject? {
                 //tag all labels with accesibitiy label "Correct"
                     for label in labelArray{
                     label.accessibilityLabel = "Correct"
+                    correctAnimation()
                     }
                 }
             //if not already a part of a correct word erase all color changes
@@ -175,6 +177,32 @@ var gameItem: AnyObject? {
         // Dispose of any resources that can be recreated.
     }
 
+    func correctAnimation(){
+        for label in labelArray{
+            UIView.animateWithDuration(1.0, animations: {
+                label.frame.size.height = 23
+                label.frame.size.width = 23
+            })
+        }
+    
+    }
+    
+    func arrivalAnimation(){
+        for subViews in view.subviews{
+            UIView.animateWithDuration(0.5, animations: {
+                subViews.transform = CGAffineTransformMakeRotation(180)
+        })
+    }
+    
 
 }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
