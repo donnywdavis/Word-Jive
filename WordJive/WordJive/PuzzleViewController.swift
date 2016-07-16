@@ -35,6 +35,7 @@ class PuzzleViewController: UIViewController {
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         buildSamplePuzzle()
@@ -87,7 +88,6 @@ class PuzzleViewController: UIViewController {
         newLabel.layer.cornerRadius = 5
         newLabel.clipsToBounds = true
         i = 1+i
-        
         self.view.addSubview(newLabel)
     }
     
@@ -111,7 +111,7 @@ class PuzzleViewController: UIViewController {
                 //only append when label firing is unique
                 if labelArray.last != subViewTouched{
                     labelArray.append(subViewTouched)}
-                print(placeOnView) }
+                }
             
             
         case .Changed:
@@ -124,7 +124,7 @@ class PuzzleViewController: UIViewController {
                 //only append when label firing is unique
                 if labelArray.last != subViewTouched{
                     labelArray.append(subViewTouched)}
-                print(placeOnView) }
+                }
             
             
         case .Ended:
@@ -152,6 +152,7 @@ class PuzzleViewController: UIViewController {
         }
     }
     
+    
     func printLabelArrayContents(){
         for label in labelArray{
             currentWord.appendContentsOf(label.text!)
@@ -159,6 +160,7 @@ class PuzzleViewController: UIViewController {
         print(currentWord)
         selectionLabel.text = currentWord
     }
+    
     
     func buildSamplePuzzle(){
         let array = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
@@ -172,11 +174,11 @@ class PuzzleViewController: UIViewController {
     }
     
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     func correctAnimation(){
         for label in labelArray{
@@ -185,24 +187,16 @@ class PuzzleViewController: UIViewController {
                 label.frame.size.width = 23
             })
         }
-        
     }
+    
     
     func arrivalAnimation(){
         for subViews in view.subviews{
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animateWithDuration(0.25, animations: {
                 subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
             })
         }
-        
     }
-    
-    
-    
-    
-    
-    
-    
     
     
 }
