@@ -199,16 +199,16 @@ class PuzzleViewController: UIViewController {
     func arrivalAnimation(){
 
         for subViews in view.subviews{
-            UIView.animateWithDuration(0.1, animations: {
-                subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+            UIView.animateWithDuration(0.01, animations: {
+                subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
             })
         }
         for subViews in view.subviews{
-            UIView.animateWithDuration(2.0,
+            UIView.animateWithDuration(0.50,
                                        delay: 0.0,
                                        usingSpringWithDamping: 0.2,
-                                       initialSpringVelocity: 10,
-                                       options: UIViewAnimationOptions.CurveEaseInOut,
+                                       initialSpringVelocity: 5,
+                                       options: UIViewAnimationOptions.CurveEaseOut,
                                        animations: {
                 subViews.transform = CGAffineTransformMakeRotation(0.0)
             }, completion: nil)

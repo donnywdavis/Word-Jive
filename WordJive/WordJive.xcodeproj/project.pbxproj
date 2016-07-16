@@ -25,6 +25,7 @@
 		9F7A605A1CEBE77D0064717B /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B8839321CEBA47100C9424B /* Pacifico.ttf */; };
 		9FB4B1641CEF5DD100E64390 /* Puzzle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FB4B1621CEF5DD100E64390 /* Puzzle.storyboard */; };
 		9FB4B1661CEF5DF600E64390 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FB4B1651CEF5DF600E64390 /* Words.storyboard */; };
+		9FB5F87C1D3A9F680091B59D /* WordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB5F87B1D3A9F680091B59D /* WordsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		8C27F4881CEBB2980098C56D /* BackEndRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackEndRequests.swift; sourceTree = "<group>"; };
 		9FB4B1631CEF5DD100E64390 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Puzzle.storyboard; sourceTree = "<group>"; };
 		9FB4B1651CEF5DF600E64390 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
+		9FB5F87B1D3A9F680091B59D /* WordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				41B5526A1CEBCE4A00B23ED7 /* SettingsTableViewCell.swift */,
 				4170800C1CECDAF3008E85DC /* SliderTableViewCell.swift */,
 				410AE90D1CEC086E00F57029 /* CapabilitiesTableViewCell.swift */,
+				9FB5F87B1D3A9F680091B59D /* WordsViewController.swift */,
 				41B5526C1CEBD21200B23ED7 /* CreditsViewController.swift */,
 			);
 			name = Controllers;
@@ -217,6 +220,7 @@
 				410AE90E1CEC086E00F57029 /* CapabilitiesTableViewCell.swift in Sources */,
 				4170800D1CECDAF3008E85DC /* SliderTableViewCell.swift in Sources */,
 				41B181901CEE2D9100FE4005 /* GamesTableViewCell.swift in Sources */,
+				9FB5F87C1D3A9F680091B59D /* WordsViewController.swift in Sources */,
 				41B5526D1CEBD21200B23ED7 /* CreditsViewController.swift in Sources */,
 				41B552591CEB8FC500B23ED7 /* MasterViewController.swift in Sources */,
 				41B5526B1CEBCE4A00B23ED7 /* SettingsTableViewCell.swift in Sources */,
