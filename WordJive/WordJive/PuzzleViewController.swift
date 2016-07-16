@@ -197,34 +197,22 @@ class PuzzleViewController: UIViewController {
     
     
     func arrivalAnimation(){
-        for subViews in view.subviews{
-            
-    UIView.animateWithDuration(1.0,
-                               delay: 0.0,
-                               usingSpringWithDamping: 0.2,
-                               initialSpringVelocity: 10,
-                               options: UIViewAnimationOptions.CurveEaseInOut,
-                               animations: {
-                                            subViews.bounds = CGRect(
-                                                x: subViews.bounds.origin.x,
-                                                y: subViews.bounds.origin.y,
-                                                width: subViews.bounds.width+10,
-                                                height: subViews.bounds.height+10)
-                                            }, completion: nil)
-        }
 
-//        for subViews in view.subviews{
-//            UIView.animateWithDuration(0.1, animations: {
-//                subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-//            })
-//        }
-//        for subViews in view.subviews{
-//            UIView.animateWithDuration(0.75, animations: {
-//                subViews.transform = CGAffineTransformMakeRotation(0.0)
-//            })
-//        }
-        
-        
+        for subViews in view.subviews{
+            UIView.animateWithDuration(0.1, animations: {
+                subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+            })
+        }
+        for subViews in view.subviews{
+            UIView.animateWithDuration(2.0,
+                                       delay: 0.0,
+                                       usingSpringWithDamping: 0.2,
+                                       initialSpringVelocity: 10,
+                                       options: UIViewAnimationOptions.CurveEaseInOut,
+                                       animations: {
+                subViews.transform = CGAffineTransformMakeRotation(0.0)
+            }, completion: nil)
+        }
     }
     
     
