@@ -99,13 +99,6 @@ var gameItem: AnyObject? {
         switch recognizer.state {
         case .Began:
             
-            //if not already a part of a correct word erase all color changes
-            for label in labelArray{
-                if label.accessibilityLabel != "Correct"{
-                    label.backgroundColor = UIColor.clearColor()
-                    label.textColor = UIColor.blackColor()
-                }
-            }
             
             if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
 
@@ -135,14 +128,21 @@ var gameItem: AnyObject? {
         case .Ended:
             printLabelArrayContents()
                 //if word is valid
-                if currentWord == "PlaceHolderForCorrectWordBank"{
+                if currentWord == "FED" || currentWord == "NDTJ"{
                 //tag all labels with accesibitiy label "Correct"
                     for label in labelArray{
                     label.accessibilityLabel = "Correct"
                     }
                 }
-            currentWord.removeAll()
+            //if not already a part of a correct word erase all color changes
+            for label in labelArray{
+                if label.accessibilityLabel != "Correct"{
+                    label.backgroundColor = UIColor.clearColor()
+                    label.textColor = UIColor.blackColor()
+                }
+            }
             currentWord = ""
+            labelArray = []
 
         default:
             break
