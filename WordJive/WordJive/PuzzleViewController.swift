@@ -17,6 +17,7 @@ class PuzzleViewController: UIViewController {
     
     var labelArray = [UILabel]()
     var samplePuzzle = [String]()
+    var solutionsArray = [String]()
     var currentWord = ""
     var i = 0
     var gameItem: AnyObject? {
@@ -129,8 +130,10 @@ class PuzzleViewController: UIViewController {
             
         case .Ended:
             printLabelArrayContents()
-            //if word is valid
-            if currentWord == "FED" || currentWord == "NDTJ"{
+            
+            //check word against array of correct answers instead of individually
+            if solutionsArray.contains(currentWord){
+
                 //tag all labels with accesibitiy label "Correct"
                 for label in labelArray{
                     label.accessibilityLabel = "Correct"
@@ -171,6 +174,9 @@ class PuzzleViewController: UIViewController {
         samplePuzzle.appendContentsOf(array)
         samplePuzzle.appendContentsOf(array)
         
+        solutionsArray = ["FED","NDTJ"]
+        
+        
     }
     
     
@@ -192,15 +198,31 @@ class PuzzleViewController: UIViewController {
     
     func arrivalAnimation(){
         for subViews in view.subviews{
-            UIView.animateWithDuration(0.1, animations: {
-                subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-            })
+            
+    UIView.animateWithDuration(1.0,
+                               delay: 0.0,
+                               usingSpringWithDamping: 0.2,
+                               initialSpringVelocity: 10,
+                               options: UIViewAnimationOptions.CurveEaseInOut,
+                               animations: {
+                                            subViews.bounds = CGRect(
+                                                x: subViews.bounds.origin.x,
+                                                y: subViews.bounds.origin.y,
+                                                width: subViews.bounds.width-5,
+                                                height: subViews.bounds.height-5)
+                                            }, completion: nil)
         }
-        for subViews in view.subviews{
-            UIView.animateWithDuration(0.75, animations: {
-                subViews.transform = CGAffineTransformMakeRotation(0.0)
-            })
-        }
+
+//        for subViews in view.subviews{
+//            UIView.animateWithDuration(0.1, animations: {
+//                subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+//            })
+//        }
+//        for subViews in view.subviews{
+//            UIView.animateWithDuration(0.75, animations: {
+//                subViews.transform = CGAffineTransformMakeRotation(0.0)
+//            })
+//        }
         
         
     }
