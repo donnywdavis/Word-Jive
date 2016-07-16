@@ -208,8 +208,8 @@ class PuzzleViewController: UIViewController {
                                             subViews.bounds = CGRect(
                                                 x: subViews.bounds.origin.x,
                                                 y: subViews.bounds.origin.y,
-                                                width: subViews.bounds.width-5,
-                                                height: subViews.bounds.height-5)
+                                                width: subViews.bounds.width+10,
+                                                height: subViews.bounds.height+10)
                                             }, completion: nil)
         }
 
