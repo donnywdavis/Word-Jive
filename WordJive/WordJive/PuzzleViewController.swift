@@ -137,6 +137,12 @@ class PuzzleViewController: UIViewController {
                     label.accessibilityLabel = "Correct"
                     correctAnimation()
                 }
+                let currentWordIndex = solutionsArray.indexOf(currentWord)
+                solutionsArray.removeAtIndex(currentWordIndex!)
+                
+                if solutionsArray.isEmpty{
+                    completeAnimation()
+                }
             }
             //if not already a part of a correct word erase all color changes
             for label in labelArray{
@@ -160,21 +166,6 @@ class PuzzleViewController: UIViewController {
         }
         print(currentWord)
         selectionLabel.text = currentWord
-    }
-    
-    
-    func buildSamplePuzzle(){
-        let array = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-        samplePuzzle = array
-        samplePuzzle.appendContentsOf(array)
-        samplePuzzle.appendContentsOf(array)
-        samplePuzzle.appendContentsOf(array)
-        samplePuzzle.appendContentsOf(array)
-        samplePuzzle.appendContentsOf(array)
-        
-        solutionsArray = ["FED","NDTJ"]
-        
-        
     }
     
     
@@ -213,7 +204,38 @@ class PuzzleViewController: UIViewController {
                 subViews.transform = CGAffineTransformMakeRotation(0.0)
             }, completion: nil)
         }
+        
     }
     
+    func completeAnimation(){
+        for subViews in view.subviews{
+            UIView.animateWithDuration(1.0,
+                        animations: {
+                        subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
+            })
+        }
+        for subViews in view.subviews{
+            UIView.animateWithDuration(1.0,
+                        animations: {
+                        subViews.transform = CGAffineTransformMakeRotation(0.0)
+                })
+        }
+        
+    }
+    
+    
+    func buildSamplePuzzle(){
+        let array = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+        samplePuzzle = array
+        samplePuzzle.appendContentsOf(array)
+        samplePuzzle.appendContentsOf(array)
+        samplePuzzle.appendContentsOf(array)
+        samplePuzzle.appendContentsOf(array)
+        samplePuzzle.appendContentsOf(array)
+        
+        solutionsArray = ["FED","ON","AT", "OH", "BUNG",]
+        
+        
+    }
     
 }
