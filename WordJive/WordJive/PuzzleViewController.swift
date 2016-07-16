@@ -76,11 +76,8 @@ var gameItem: AnyObject? {
             //create unique frame on the view using these inputs
             let labelPlacement = CGRectMake(a10, b10, CGFloat(20), CGFloat(20))
             
-            //create a label with the frame
+            //create a label to hold each letter
             let newLabel = UILabel.init(frame: labelPlacement)
-            
-//substitute this text for specific index of array and loop through.
-            
             newLabel.text = samplePuzzle[i]
             newLabel.font = UIFont.systemFontOfSize(20)
             newLabel.textAlignment = .Center
@@ -88,7 +85,6 @@ var gameItem: AnyObject? {
             newLabel.layer.cornerRadius = 5
             newLabel.clipsToBounds = true
             i = 1+i
-            
             
             self.view.addSubview(newLabel)
         }
@@ -141,20 +137,16 @@ var gameItem: AnyObject? {
                 //if word is valid
                 if currentWord == "PlaceHolderForCorrectWordBank"{
                 //tag all labels with accesibitiy label "Correct"
-                for label in labelArray{
+                    for label in labelArray{
                     label.accessibilityLabel = "Correct"
                     }
-                    
-            }
+                }
             currentWord.removeAll()
             currentWord = ""
 
-            
         default:
             break
         }
-        //append text from the touched subview to an array.
-        
     }
 
     func printLabelArrayContents(){
