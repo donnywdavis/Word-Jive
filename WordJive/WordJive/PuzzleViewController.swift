@@ -41,12 +41,10 @@ class PuzzleViewController: UIViewController {
         super.viewDidLoad()
         buildSamplePuzzle()
         
-        let width = 10
-        let height = 10
         
         //change user input to int
-        var x = Int(width)
-        var y = Int(height)
+        var x = Int(7) //width
+        var y = Int(10) //height
         
         //store x value for later
         let xSub = x
@@ -65,7 +63,6 @@ class PuzzleViewController: UIViewController {
             y = y-1
         }
         
-        
         self.configureView()
         arrivalAnimation()
         
@@ -74,16 +71,17 @@ class PuzzleViewController: UIViewController {
     
     func labelCreator(a:Int, b:Int){
         //convert int to float
-        let a10 = CGFloat(a*25)
-        let b10 = CGFloat(b*25+50)
+        let a10 = CGFloat(a*35)
+        let b10 = CGFloat(b*35+50)
         
         //create unique frame on the view using these inputs
-        let labelPlacement = CGRectMake(a10, b10, CGFloat(20), CGFloat(20))
+        let labelPlacement = CGRectMake(a10, b10, CGFloat(30), CGFloat(30))
+    
         
         //create a label to hold each letter
         let newLabel = UILabel.init(frame: labelPlacement)
         newLabel.text = samplePuzzle[i]
-        newLabel.font = UIFont.systemFontOfSize(20)
+        newLabel.font = UIFont.systemFontOfSize(25)
         newLabel.textAlignment = .Center
         newLabel.userInteractionEnabled = true
         newLabel.layer.cornerRadius = 5
@@ -193,8 +191,8 @@ class PuzzleViewController: UIViewController {
                                        initialSpringVelocity: 5,
                                        options: UIViewAnimationOptions.CurveEaseOut,
                                        animations: {
-                label.frame.size.height = 23
-                label.frame.size.width = 23
+                label.frame.size.height = 35
+                label.frame.size.width = 35
                                         }, completion: nil)
             }
         }
