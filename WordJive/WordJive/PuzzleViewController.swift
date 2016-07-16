@@ -11,7 +11,9 @@ import CoreData
 
 class PuzzleViewController: UIViewController {
     
-@IBOutlet weak var detailDescriptionLabel: UILabel!
+    @IBOutlet weak var detailDescriptionLabel: UILabel!
+    @IBOutlet weak var selectionLabel: UILabel!
+    
     
 var labelArray = [UILabel]()
 var samplePuzzle = [String]()
@@ -77,9 +79,6 @@ var gameItem: AnyObject? {
             //create a label with the frame
             let newLabel = UILabel.init(frame: labelPlacement)
             
-            //create tag for label
-            newLabel.accessibilityLabel = "puzzle"
-            
 //substitute this text for specific index of array and loop through.
             
             newLabel.text = samplePuzzle[i]
@@ -89,6 +88,7 @@ var gameItem: AnyObject? {
             newLabel.layer.cornerRadius = 5
             newLabel.clipsToBounds = true
             i = 1+i
+            
             
             self.view.addSubview(newLabel)
         }
@@ -102,6 +102,15 @@ var gameItem: AnyObject? {
         
         switch recognizer.state {
         case .Began:
+            
+            //if not already a part of a correct word erase all color changes
+            for label in labelArray{
+                if label.accessibilityLabel != "Correct"{
+                    label.backgroundColor = UIColor.clearColor()
+                    label.textColor = UIColor.blackColor()
+                }
+            }
+            
             if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
 
             //change to expanding oval
@@ -128,17 +137,19 @@ var gameItem: AnyObject? {
             
             
         case .Ended:
-            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
-                
-                //change to expanding oval
-                subViewTouched.backgroundColor = .clearColor()
-                subViewTouched.textColor = .blackColor()
-                
-                //only append when label firing is unique
-                if labelArray.last != subViewTouched{
-                    labelArray.append(subViewTouched)}
-                printLabelArrayContents()
+            printLabelArrayContents()
+                //if word is valid
+                if currentWord == "PlaceHolderForCorrectWordBank"{
+                //tag all labels with accesibitiy label "Correct"
+                for label in labelArray{
+                    label.accessibilityLabel = "Correct"
+                    }
+                    
             }
+            currentWord.removeAll()
+            currentWord = ""
+
+            
         default:
             break
         }
@@ -151,7 +162,7 @@ var gameItem: AnyObject? {
             currentWord.appendContentsOf(label.text!)
         }
         print(currentWord)
-        currentWord.removeAll()
+        selectionLabel.text = currentWord
     }
     
     func buildSamplePuzzle(){
