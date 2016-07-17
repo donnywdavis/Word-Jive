@@ -212,12 +212,11 @@ class PuzzleViewController: UIViewController {
     func completeAnimation(){
         for subViews in view.subviews{
             animator = UIDynamicAnimator(referenceView: self.view)
-
+            gravity = UIGravityBehavior(items: [subViews])
             gravity.addItem(subViews)
             gravity.gravityDirection = CGVectorMake(0, 0.8)
             animator.addBehavior(gravity)
-            
-            
+
         }
     }
     
