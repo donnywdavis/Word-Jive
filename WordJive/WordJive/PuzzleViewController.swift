@@ -20,6 +20,8 @@ class PuzzleViewController: UIViewController {
     var solutionsArray = [String]()
     var currentWord = ""
     var i = 0
+    var gravity: UIGravityBehavior!
+    var animator: UIDynamicAnimator!
     var gameItem: AnyObject? {
         didSet {
             // Update the view.
@@ -209,17 +211,23 @@ class PuzzleViewController: UIViewController {
     
     func completeAnimation(){
         for subViews in view.subviews{
-            UIView.animateWithDuration(1.0,
-                        animations: {
-                        subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-            })
+            animator = UIDynamicAnimator(referenceView: self.view)
+            gravity = UIGravityBehavior(items: [subViews])
+            animator.addBehavior(gravity)
+            
         }
-        for subViews in view.subviews{
-            UIView.animateWithDuration(1.0,
-                        animations: {
-                        subViews.transform = CGAffineTransformMakeRotation(0.0)
-                })
-        }
+            
+//            UIView.animateWithDuration(2.0,
+//                        animations: {
+//                        subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+//            })
+//        }
+//        for subViews in view.subviews{
+//            UIView.animateWithDuration(1.0,
+//                        animations: {
+//                        subViews.transform = CGAffineTransformMakeRotation(0.0)
+//                })
+//        }
         
     }
     
