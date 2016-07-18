@@ -18,7 +18,6 @@ class WordsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         placeSolutionsFromArrayOnView()
-                solutionsArray = ["FED","ON","AT", "OH", "BUNG",]
         
         
     }
@@ -31,6 +30,8 @@ class WordsViewController: UIViewController {
     
     
     func placeSolutionsFromArrayOnView(){
+        solutionsArray = ["FED","ON","AT", "OH", "BUNG"]
+
     var i = 0
         while i <= solutionsArray.count{
         let xOrigin = CGFloat(view.frame.width/2)
