@@ -238,7 +238,7 @@ class PuzzleViewController: UIViewController {
         samplePuzzle.appendContentsOf(array)
         samplePuzzle.appendContentsOf(array)
         
-        solutionsArray = ["FED","ON","AT", "OH", "BUNG",]
+        solutionsArray = ["FED","ON","AT", "OH"]
         
         
     }
