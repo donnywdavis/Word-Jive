@@ -11,8 +11,16 @@ import UIKit
 
 class WordsViewController: UIViewController {
     
+    var solutionsArray = [String]()
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        placeSolutionsFromArrayOnView()
+                solutionsArray = ["FED","ON","AT", "OH", "BUNG",]
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -22,7 +30,17 @@ class WordsViewController: UIViewController {
     
     
     
-    
+    func placeSolutionsFromArrayOnView(){
+    var i = 0
+        while i <= solutionsArray.count{
+        let xOrigin = CGFloat(view.frame.width/2)
+        let rect = CGRectMake(xOrigin, CGFloat(20*i), 100, 20)
+        let newLabel = UILabel.init(frame: rect)
+        newLabel.text = solutionsArray[i]
+            i = i + 1
+        }
+        
+    }
     
     
     
