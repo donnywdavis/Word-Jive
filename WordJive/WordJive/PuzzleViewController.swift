@@ -74,6 +74,7 @@ class PuzzleViewController: UIViewController {
         gravity.gravityDirection = CGVectorMake(0, 0.8)
         animator.addBehavior(gravity)
         collision = UICollisionBehavior()
+        collision.collisionMode = UICollisionBehaviorMode.Boundaries
         collision.translatesReferenceBoundsIntoBoundary = true
         animator.addBehavior(collision)
         
