@@ -28,15 +28,17 @@ class WordsViewController: UIViewController {
     
     
     func placeSolutionsFromArrayOnView(){
-        solutionsArray = ["FED","ON","AT", "OH", "BUNG"]
-
-    var i = 0
-        while i <= solutionsArray.count{
+        solutionsArray = ["FED", "ON", "AT", "OH", "BUNG"]
+        var i = 0
+        while i < solutionsArray.count{
         let xOrigin = CGFloat(view.frame.width/2)
         let rect = CGRectMake(xOrigin, CGFloat(20*i), 100, 20)
         let newLabel = UILabel.init(frame: rect)
         newLabel.text = solutionsArray[i]
+        newLabel.textAlignment = .Center
+        self.view.addSubview(newLabel)
             i = i + 1
+
         }
         
     }
