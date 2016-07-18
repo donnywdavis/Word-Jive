@@ -210,25 +210,14 @@ class PuzzleViewController: UIViewController {
     }
     
     func completeAnimation(){
-                let subViews = view.subviews.last
+        for subViews in view.subviews{
                     animator = UIDynamicAnimator(referenceView: self.view)
-                    gravity = UIGravityBehavior.init(items: [subViews!])
-                    gravity.addItem(subViews!)
-                    gravity.gravityDirection = CGVectorMake(0, 0.8)
-                    animator.addBehavior(gravity)
-        
-    for subViews in view.subviews{
-        UIView.animateWithDuration(1.0,
-                                   animations: {
-                                    subViews.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-        })
-    }
-    for subViews in view.subviews{
-        UIView.animateWithDuration(1.0,
-                                   animations: {
-                                    subViews.transform = CGAffineTransformMakeRotation(0.0)
-            })
+                    gravity = UIGravityBehavior.init(items: [subViews])
+                    gravity.addItem(subViews)
+            gravity.gravityDirection = CGVectorMake(0, 0.8)
         }
+                    animator.addBehavior(gravity)
+
     }
     
     
