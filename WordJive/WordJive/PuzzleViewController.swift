@@ -15,13 +15,15 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var selectionLabel: UILabel!
     
     
-    var labelArray = [UILabel]()
+    var currentWordLabelArray = [UILabel]()
+    var puzzleLabelArray = [UILabel]()
     var samplePuzzle = [String]()
     var solutionsArray = [String]()
     var currentWord = ""
     var i = 0
     var gravity: UIGravityBehavior!
     var animator: UIDynamicAnimator!
+    var collision: UICollisionBehavior!
     var gameItem: AnyObject? {
         didSet {
             // Update the view.
@@ -67,6 +69,13 @@ class PuzzleViewController: UIViewController {
         
         self.configureView()
         arrivalAnimation()
+        animator = UIDynamicAnimator(referenceView: self.view)
+        gravity = UIGravityBehavior()
+        gravity.gravityDirection = CGVectorMake(0, 0.8)
+        animator.addBehavior(gravity)
+        collision = UICollisionBehavior()
+        collision.translatesReferenceBoundsIntoBoundary = true
+        animator.addBehavior(collision)
         
     }
     
@@ -89,6 +98,7 @@ class PuzzleViewController: UIViewController {
         newLabel.layer.cornerRadius = 5
         newLabel.clipsToBounds = true
         i = 1+i
+        puzzleLabelArray.append(newLabel)
         self.view.addSubview(newLabel)
     }
     
@@ -107,11 +117,11 @@ class PuzzleViewController: UIViewController {
                 
                 //change to expanding oval
                 subViewTouched.backgroundColor = .redColor()
-                subViewTouched.textColor = .whiteColor()
+                subViewTouched.textColor = .yellowColor()
                 
                 //only append when label firing is unique
-                if labelArray.last != subViewTouched{
-                    labelArray.append(subViewTouched)}
+                if currentWordLabelArray.last != subViewTouched{
+                    currentWordLabelArray.append(subViewTouched)}
                 }
             
             
@@ -120,11 +130,11 @@ class PuzzleViewController: UIViewController {
                 
                 //change to expanding oval
                 subViewTouched.backgroundColor = .redColor()
-                subViewTouched.textColor = .whiteColor()
+                subViewTouched.textColor = .yellowColor()
                 
                 //only append when label firing is unique
-                if labelArray.last != subViewTouched{
-                    labelArray.append(subViewTouched)}
+                if currentWordLabelArray.last != subViewTouched{
+                    currentWordLabelArray.append(subViewTouched)}
                 }
             
             
@@ -135,7 +145,7 @@ class PuzzleViewController: UIViewController {
             if solutionsArray.contains(currentWord){
 
                 //tag all labels with accesibitiy label "Correct"
-                for label in labelArray{
+                for label in currentWordLabelArray{
                     label.accessibilityLabel = "Correct"
                     correctAnimation()
                 }
@@ -147,14 +157,14 @@ class PuzzleViewController: UIViewController {
                 }
             }
             //if not already a part of a correct word erase all color changes
-            for label in labelArray{
+            for label in currentWordLabelArray{
                 if label.accessibilityLabel != "Correct"{
                     label.backgroundColor = UIColor.clearColor()
                     label.textColor = UIColor.blackColor()
                 }
             }
             currentWord = ""
-            labelArray = []
+            currentWordLabelArray = []
             
         default:
             break
@@ -163,7 +173,7 @@ class PuzzleViewController: UIViewController {
     
     
     func printLabelArrayContents(){
-        for label in labelArray{
+        for label in currentWordLabelArray{
             currentWord.appendContentsOf(label.text!)
         }
         print(currentWord)
@@ -177,7 +187,7 @@ class PuzzleViewController: UIViewController {
     
     
     func correctAnimation(){
-        for label in labelArray{
+        for label in currentWordLabelArray{
             UIView.animateWithDuration(1.0,
                                        delay: 0.0,
                                        usingSpringWithDamping: 0.2,
@@ -210,16 +220,10 @@ class PuzzleViewController: UIViewController {
     }
     
     func completeAnimation(){
-//        for subViews in view.subviews{
-                    animator = UIDynamicAnimator(referenceView: self.view)
-
-        for subViews in view.subviews{
-                    gravity = UIGravityBehavior.init(items: [subViews])
-                    gravity.addItem(subViews)
+        for labels in puzzleLabelArray{
+                    gravity.addItem(labels)
+                    collision.addItem(labels)
         }
-            gravity.gravityDirection = CGVectorMake(0, 0.8)
-//        }
-                    animator.addBehavior(gravity)
 
     }
     
