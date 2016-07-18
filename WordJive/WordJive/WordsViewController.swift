@@ -13,8 +13,6 @@ class WordsViewController: UIViewController {
     
     var solutionsArray = [String]()
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         placeSolutionsFromArrayOnView()
