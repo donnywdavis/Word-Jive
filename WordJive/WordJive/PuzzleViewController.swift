@@ -44,31 +44,17 @@ class PuzzleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         buildSamplePuzzle()
-        
-        
-        //change user input to int
-        var x = Int(7) //width
-        var y = Int(10) //height
-        
-        //store x value for later
-        let xSub = x
-        
-        //loop through y values (columns)
-        while (y>0){
-            
-            //loop through x values (rows). One row for each y value
-            while (x>0) {
-                
-                //each time through fire label creator
-                labelCreator(x,b:y)
-                x = x-1
-            }
-            x = xSub
-            y = y-1
-        }
-        
+        setPuzzleSize()
+
         self.configureView()
         arrivalAnimation()
+        setAnimation()
+
+        
+    }
+    
+    
+    func setAnimation(){
         animator = UIDynamicAnimator(referenceView: self.view)
         gravity = UIGravityBehavior()
         gravity.gravityDirection = CGVectorMake(0, 0.8)
@@ -103,6 +89,31 @@ class PuzzleViewController: UIViewController {
         self.view.addSubview(newLabel)
     }
     
+    func setPuzzleSize(){
+        
+        //change user input to int
+        var x = Int(7) //width
+        var y = Int(10) //height
+        
+        //store x value for later
+        let xSub = x
+        
+        //loop through y values (columns)
+        while (y>0){
+            
+            //loop through x values (rows). One row for each y value
+            while (x>0) {
+                
+                //each time through fire label creator
+                labelCreator(x,b:y)
+                x = x-1
+            }
+            x = xSub
+            y = y-1
+            
+            
+        }
+    }
     
     @IBAction func lettersTouched(recognizer:UIPanGestureRecognizer) {
         
