@@ -26,6 +26,7 @@
 		9FB4B1641CEF5DD100E64390 /* Puzzle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FB4B1621CEF5DD100E64390 /* Puzzle.storyboard */; };
 		9FB4B1661CEF5DF600E64390 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FB4B1651CEF5DF600E64390 /* Words.storyboard */; };
 		9FB5F87C1D3A9F680091B59D /* WordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB5F87B1D3A9F680091B59D /* WordsViewController.swift */; };
+		9FDE00C21D4132250000DE78 /* DataLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDE00C11D4132250000DE78 /* DataLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		9FB4B1631CEF5DD100E64390 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Puzzle.storyboard; sourceTree = "<group>"; };
 		9FB4B1651CEF5DF600E64390 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 		9FB5F87B1D3A9F680091B59D /* WordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsViewController.swift; sourceTree = "<group>"; };
+		9FDE00C11D4132250000DE78 /* DataLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		9FB4B1691CEF629900E64390 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9FDE00C11D4132250000DE78 /* DataLabel.swift */,
 				41B552551CEB8FC500B23ED7 /* WordJive.xcdatamodeld */,
 			);
 			name = Model;
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B8839311CEBA17000C9424B /* GameSetupViewController.swift in Sources */,
+				9FDE00C21D4132250000DE78 /* DataLabel.swift in Sources */,
 				41B552541CEB8FC500B23ED7 /* AppDelegate.swift in Sources */,
 				41B552571CEB8FC500B23ED7 /* WordJive.xcdatamodeld in Sources */,
 				410AE90E1CEC086E00F57029 /* CapabilitiesTableViewCell.swift in Sources */,
