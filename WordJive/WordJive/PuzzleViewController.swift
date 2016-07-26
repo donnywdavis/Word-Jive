@@ -15,7 +15,7 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var selectionLabel: UILabel!
     
     
-    var currentWordLabelArray = [DataLabel]()
+    var currentWordLabelArray = [Letter]()
     var puzzleLabelArray = [UILabel]()
     var samplePuzzle = [String]()
     var solutionsArray = [String]()
@@ -123,7 +123,7 @@ class PuzzleViewController: UIViewController {
         case .Began:
             
             
-            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? DataLabel {
+            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? Letter {
                 
                 //change to expanding oval
                 subViewTouched.backgroundColor = .redColor()
@@ -136,7 +136,7 @@ class PuzzleViewController: UIViewController {
             
             
         case .Changed:
-            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? DataLabel {
+            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? Letter {
                 
                 //change to expanding oval
                 subViewTouched.backgroundColor = .redColor()
@@ -168,7 +168,7 @@ class PuzzleViewController: UIViewController {
             }
             //if not already a part of a correct word erase all color changes
             for label in currentWordLabelArray{
-                if label.info != "Correct"{
+                if label.accessibilityLabel != "Correct"{
                     label.backgroundColor = UIColor.clearColor()
                     label.textColor = UIColor.blackColor()
                 }
