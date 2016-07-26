@@ -45,12 +45,9 @@ class PuzzleViewController: UIViewController {
         super.viewDidLoad()
         buildSamplePuzzle()
         setPuzzleSize()
-
         self.configureView()
         arrivalAnimation()
         setAnimation()
-
-        
     }
     
     
@@ -63,7 +60,6 @@ class PuzzleViewController: UIViewController {
         collision.collisionMode = UICollisionBehaviorMode.Boundaries
         collision.translatesReferenceBoundsIntoBoundary = true
         animator.addBehavior(collision)
-        
     }
     
     
@@ -88,6 +84,7 @@ class PuzzleViewController: UIViewController {
         puzzleLabelArray.append(newLabel)
         self.view.addSubview(newLabel)
     }
+    
     
     func setPuzzleSize(){
         
@@ -114,6 +111,7 @@ class PuzzleViewController: UIViewController {
             
         }
     }
+    
     
     @IBAction func lettersTouched(recognizer:UIPanGestureRecognizer) {
         
