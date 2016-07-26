@@ -168,7 +168,7 @@ class PuzzleViewController: UIViewController {
             }
             //if not already a part of a correct word erase all color changes
             for label in currentWordLabelArray{
-                if label.accessibilityLabel != "Correct"{
+                if label.info != "Correct"{
                     label.backgroundColor = UIColor.clearColor()
                     label.textColor = UIColor.blackColor()
                 }
