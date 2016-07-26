@@ -15,11 +15,11 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var selectionLabel: UILabel!
     
     
-    var currentWordLabelArray = [Letter]()
-    var puzzleLabelArray = [UILabel]()
+    var currentWord = [Letter]()
+    var puzzle = [Letter]()
     var samplePuzzle = [String]()
     var solutionsArray = [String]()
-    var currentWord = ""
+    var currentWordString = ""
     var i = 0
     var gravity: UIGravityBehavior!
     var animator: UIDynamicAnimator!
@@ -70,9 +70,8 @@ class PuzzleViewController: UIViewController {
         
         //create unique frame on the view using these inputs
         let labelPlacement = CGRectMake(a10, b10, CGFloat(30), CGFloat(30))
-    
         
-        //create a label to hold each letter
+        //create a label for letter
         let newLabel = UILabel.init(frame: labelPlacement)
         newLabel.text = samplePuzzle[i]
         newLabel.font = UIFont.systemFontOfSize(25)
@@ -81,8 +80,17 @@ class PuzzleViewController: UIViewController {
         newLabel.layer.cornerRadius = 5
         newLabel.clipsToBounds = true
         i = 1+i
-        puzzleLabelArray.append(newLabel)
-        self.view.addSubview(newLabel)
+        
+        //create a view to contain the label
+        let newLetter = Letter()
+        newLetter.bounds = newLabel.bounds
+        newLetter.addSubview(newLabel)
+        
+        //add letter to the puzzle
+        puzzle.append(newLetter)
+        
+        //add letter to view
+        self.view.addSubview(newLetter)
     }
     
     
@@ -112,6 +120,10 @@ class PuzzleViewController: UIViewController {
         }
     }
     
+    func highlightLetter(){
+        
+    }
+    
     
     @IBAction func lettersTouched(recognizer:UIPanGestureRecognizer) {
         
@@ -130,8 +142,8 @@ class PuzzleViewController: UIViewController {
                 subViewTouched.label?.textColor = .yellowColor()
                 
                 //only append when label firing is unique
-                if currentWordLabelArray.last != subViewTouched{
-                    currentWordLabelArray.append(subViewTouched)}
+                if currentWord.last != subViewTouched{
+                    currentWord.append(subViewTouched)}
                 }
             
             
@@ -143,8 +155,8 @@ class PuzzleViewController: UIViewController {
                 subViewTouched.label?.textColor = .yellowColor()
                 
                 //only append when label firing is unique
-                if currentWordLabelArray.last != subViewTouched{
-                    currentWordLabelArray.append(subViewTouched)}
+                if currentWord.last != subViewTouched{
+                    currentWord.append(subViewTouched)}
                 }
             
             
@@ -152,14 +164,14 @@ class PuzzleViewController: UIViewController {
             printLabelArrayContents()
             
             //check word against array of correct answers instead of individually
-            if solutionsArray.contains(currentWord){
+            if solutionsArray.contains(currentWordString){
 
                 //tag all labels with label "Correct"
-                for letter in currentWordLabelArray{
+                for letter in currentWord{
                     letter.identifier = "Correct"
                     correctAnimation()
                 }
-                let currentWordIndex = solutionsArray.indexOf(currentWord)
+                let currentWordIndex = solutionsArray.indexOf(currentWordString)
                 solutionsArray.removeAtIndex(currentWordIndex!)
                 
                 if solutionsArray.isEmpty{
@@ -167,14 +179,14 @@ class PuzzleViewController: UIViewController {
                 }
             }
             //if not already a part of a correct word erase all color changes
-            for letter in currentWordLabelArray{
+            for letter in currentWord{
                 if letter.identifier != "Correct"{
                     letter.label?.backgroundColor = UIColor.clearColor()
                     letter.label?.textColor = UIColor.blackColor()
                 }
             }
-            currentWord = ""
-            currentWordLabelArray = []
+            currentWordString = ""
+            currentWord = []
             
         default:
             break
@@ -183,11 +195,11 @@ class PuzzleViewController: UIViewController {
     
     
     func printLabelArrayContents(){
-        for letter in currentWordLabelArray{
-            currentWord.appendContentsOf(letter.label!.text!)
+        for letter in currentWord{
+            currentWordString.appendContentsOf(letter.label!.text!)
         }
-        print(currentWord)
-        selectionLabel.text = currentWord
+        print(currentWordString)
+        selectionLabel.text = currentWordString
     }
     
     
@@ -197,15 +209,15 @@ class PuzzleViewController: UIViewController {
     
     
     func correctAnimation(){
-        for label in currentWordLabelArray{
+        for letter in currentWord{
             UIView.animateWithDuration(1.0,
                                        delay: 0.0,
                                        usingSpringWithDamping: 0.2,
                                        initialSpringVelocity: 5,
                                        options: UIViewAnimationOptions.CurveEaseOut,
                                        animations: {
-                label.frame.size.height = 35
-                label.frame.size.width = 35
+                letter.frame.size.height = 35
+                letter.frame.size.width = 35
                                         }, completion: nil)
             }
         }
@@ -230,9 +242,9 @@ class PuzzleViewController: UIViewController {
     }
     
     func completeAnimation(){
-        for labels in puzzleLabelArray{
-                    gravity.addItem(labels)
-                    collision.addItem(labels)
+        for letters in puzzle{
+                    gravity.addItem(letters)
+                    collision.addItem(letters)
         }
 
     }
