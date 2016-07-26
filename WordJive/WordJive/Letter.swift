@@ -11,7 +11,7 @@ import UIKit
 class Letter: UIView {
     
     var label: UILabel?
-    var info: String?
+    var identifier: String?
 
     /*
     // Only override drawRect: if you perform custom drawing.
