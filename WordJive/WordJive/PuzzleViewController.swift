@@ -148,15 +148,16 @@ class PuzzleViewController: UIViewController {
             
             
         case .Changed:
-            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? Letter {
+            
+            if let letterLabel = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
                 
                 //change to expanding oval
-                subViewTouched.label?.backgroundColor = .redColor()
-                subViewTouched.label?.textColor = .yellowColor()
+                letterLabel.backgroundColor = .redColor()
+                letterLabel.textColor = .yellowColor()
                 
                 //only append when label firing is unique
-                if currentWord.last != subViewTouched{
-                    currentWord.append(subViewTouched)}
+//                if currentWord.last != letterLabel{
+//                    currentWord.append(letterLabel.text!)}
                 }
             
             
@@ -233,7 +234,7 @@ class PuzzleViewController: UIViewController {
             })
         }
         for subViews in view.subviews{
-            UIView.animateWithDuration(0.50,
+            UIView.animateWithDuration(1.0,
                                        animations: {
                 subViews.transform = CGAffineTransformMakeRotation(0.0)
             }, completion: nil)
@@ -242,9 +243,9 @@ class PuzzleViewController: UIViewController {
     }
     
     func completeAnimation(){
-        for letters in puzzle{
-                    gravity.addItem(letters)
-                    collision.addItem(letters)
+        for letter in puzzle{
+                    gravity.addItem(letter.label!)
+                    collision.addItem(letter.label!)
         }
 
     }
