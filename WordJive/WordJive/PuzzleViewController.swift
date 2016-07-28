@@ -192,17 +192,17 @@ class PuzzleViewController: UIViewController {
             printLabelArrayContents()
             
             //check word against array of correct answers instead of individually
-            if solutionsArray.contains(currentWord){
+            if words.contains(currentWord){
 
                 //tag all labels with accesibitiy label "Correct"
                 for label in currentWordLabelArray{
                     label.accessibilityLabel = "Correct"
                     correctAnimation()
                 }
-                let currentWordIndex = solutionsArray.indexOf(currentWord)
-                solutionsArray.removeAtIndex(currentWordIndex!)
+                let currentWordIndex = words.indexOf(currentWord)
+                words.removeAtIndex(currentWordIndex!)
                 
-                if solutionsArray.isEmpty{
+                if words.isEmpty{
                     completeAnimation()
                 }
             }
