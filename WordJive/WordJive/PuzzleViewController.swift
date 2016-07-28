@@ -14,6 +14,8 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var selectionLabel: UILabel!
     
+    var fetchedResultsController: NSFetchedResultsController?
+    var context: NSManagedObjectContext?
     
     var currentWordLabelArray = [UILabel]()
     var puzzleLabelArray = [UILabel]()
@@ -24,15 +26,31 @@ class PuzzleViewController: UIViewController {
     var gravity: UIGravityBehavior!
     var animator: UIDynamicAnimator!
     var collision: UICollisionBehavior!
-    var gameItem: AnyObject? {
-        didSet {
-            // Update the view.
-            self.configureView()}}
+    var gameItem: AnyObject?
+    var puzzle = [[String]]()
+    var words = [String]()
+    var game: Game?
+    var completedWords = [String]()
     
     func configureView() {
         // Update the user interface for the detail item.
-        if let game = self.gameItem {
-            navigationController?.navigationItem.title = game.valueForKey("title") as? String
+        if let game = self.gameItem as? Game {
+            self.game = game
+            navigationController?.navigationItem.title = self.game?.title
+            do {
+                let puzzleWordsData = try NSJSONSerialization.JSONObjectWithData((self.game?.puzzle)!, options: .AllowFragments) as! [String: AnyObject]
+                puzzle = puzzleWordsData["puzzle"] as! [[String]]
+                words = (puzzleWordsData["words"] as! [[String: AnyObject]]).map{
+                    dictionaryElement in
+                    return dictionaryElement["word"] as! String
+                    
+                }
+                
+                
+                //solutionsArray.appendContentsOf(words.objectForKey("words"))
+            } catch {
+                print("Cannot parse puzzle data.")
+            }
             
             // add other items from core data
             
@@ -43,11 +61,27 @@ class PuzzleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        context = fetchedResultsController?.managedObjectContext
+        self.configureView()
         buildSamplePuzzle()
         setPuzzleSize()
-        self.configureView()
         arrivalAnimation()
         setAnimation()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+//        // Save the context.
+//        do {
+//            try context!.save()
+//        } catch {
+//            // Replace this implementation with code to handle the error appropriately.
+//            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            //print("Unresolved error \(error), \(error.userInfo)")
+//            abort()
+//        }
     }
     
     
@@ -74,7 +108,9 @@ class PuzzleViewController: UIViewController {
         
         //create a label to hold each letter
         let newLabel = UILabel.init(frame: labelPlacement)
-        newLabel.text = samplePuzzle[i]
+        //newLabel.text = samplePuzzle[i]
+        
+        newLabel.text = puzzle[a-1][b-1]
         newLabel.font = UIFont.systemFontOfSize(25)
         newLabel.textAlignment = .Center
         newLabel.userInteractionEnabled = true
@@ -88,9 +124,14 @@ class PuzzleViewController: UIViewController {
     
     func setPuzzleSize(){
         
+        //set width of puzzle from user input
+        var x = Int((game?.width)!)
         //change user input to int
-        var x = Int(7) //width
-        var y = Int(10) //height
+        //var x = Int(7) //width
+        
+        //set height of puzzle from user input
+        var y = Int((game?.height)!)
+        //var y = Int(10) //height
         
         //store x value for later
         let xSub = x
@@ -151,17 +192,17 @@ class PuzzleViewController: UIViewController {
             printLabelArrayContents()
             
             //check word against array of correct answers instead of individually
-            if solutionsArray.contains(currentWord){
+            if words.contains(currentWord){
 
                 //tag all labels with accesibitiy label "Correct"
                 for label in currentWordLabelArray{
                     label.accessibilityLabel = "Correct"
                     correctAnimation()
                 }
-                let currentWordIndex = solutionsArray.indexOf(currentWord)
-                solutionsArray.removeAtIndex(currentWordIndex!)
+                let currentWordIndex = words.indexOf(currentWord)
+                words.removeAtIndex(currentWordIndex!)
                 
-                if solutionsArray.isEmpty{
+                if words.isEmpty{
                     completeAnimation()
                 }
             }
