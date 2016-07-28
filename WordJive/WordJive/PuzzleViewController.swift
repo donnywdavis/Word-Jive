@@ -29,6 +29,7 @@ class PuzzleViewController: UIViewController {
     var gameItem: AnyObject?
     var puzzle = [[String]]()
     var words = [String]()
+    var wordList = [String]()
     var game: Game?
     var completedWords = [String]()
     
@@ -43,8 +44,8 @@ class PuzzleViewController: UIViewController {
                 words = (puzzleWordsData["words"] as! [[String: AnyObject]]).map{
                     dictionaryElement in
                     return dictionaryElement["word"] as! String
-                    
                 }
+                wordList = words
                 
                 
                 //solutionsArray.appendContentsOf(words.objectForKey("words"))
@@ -292,6 +293,20 @@ class PuzzleViewController: UIViewController {
         solutionsArray = ["FED","ON","AT", "OH"]
         
         
+    }
+    
+}
+
+// MARK: Navigation
+
+extension PuzzleViewController {
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "WordsSegue" {
+            let wordsVC = (segue.destinationViewController as? UINavigationController)?.topViewController as? WordsViewController
+            wordsVC?.words = words
+            wordsVC?.wordList = wordList
+        }
     }
     
 }
