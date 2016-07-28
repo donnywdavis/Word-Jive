@@ -41,11 +41,11 @@ class PuzzleViewController: UIViewController {
             do {
                 let puzzleWordsData = try NSJSONSerialization.JSONObjectWithData((self.game?.puzzle)!, options: .AllowFragments) as! [String: AnyObject]
                 puzzle = puzzleWordsData["puzzle"] as! [[String]]
-                words = (puzzleWordsData["words"] as! [[String: AnyObject]]).map{
+                wordList = (puzzleWordsData["words"] as! [[String: AnyObject]]).map{
                     dictionaryElement in
                     return dictionaryElement["word"] as! String
                 }
-                wordList = words
+                words = wordList
                 
                 
                 //solutionsArray.appendContentsOf(words.objectForKey("words"))
@@ -74,15 +74,15 @@ class PuzzleViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-//        // Save the context.
-//        do {
-//            try context!.save()
-//        } catch {
-//            // Replace this implementation with code to handle the error appropriately.
-//            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            //print("Unresolved error \(error), \(error.userInfo)")
-//            abort()
-//        }
+        // Save the context.
+        do {
+            try context!.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //print("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
     }
     
     
@@ -207,6 +207,7 @@ class PuzzleViewController: UIViewController {
                 
                 if words.isEmpty{
                     completeAnimation()
+                    game?.completed = true
                 }
             }
             //if not already a part of a correct word erase all color changes
@@ -277,7 +278,7 @@ class PuzzleViewController: UIViewController {
                     gravity.addItem(labels)
                     collision.addItem(labels)
         }
-
+        
     }
     
     
