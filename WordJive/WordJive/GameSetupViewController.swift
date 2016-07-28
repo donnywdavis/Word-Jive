@@ -28,7 +28,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     let slidersArray = [
         ["title": "Width", "placeholder": 20, "key": "width"],
         ["title": "Height", "placeholder": 20, "key": "height"],
-        ["title": "Words", "placeholder": 10, "key": "words"],
+        ["title": "Words", "placeholder": 10, "key": "numberOfWords"],
         ["title": "Min Word Length", "placeholder": 4, "key": "minWordLength"],
         ["title": "Max Word Length", "placeholder": 10, "key": "maxWordLength"]]
     
@@ -94,7 +94,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         newManagedObject.setValue(false, forKey: "completed")
-        dataDictionary["capabilities"] = selectedCapabilities
+        dataDictionary["requestCapabilities"] = selectedCapabilities
         
         // Save the context.
         do {
