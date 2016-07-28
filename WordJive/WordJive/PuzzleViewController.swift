@@ -28,7 +28,7 @@ class PuzzleViewController: UIViewController {
     var collision: UICollisionBehavior!
     var gameItem: AnyObject?
     var puzzle = [[String]]()
-    var words = [[String: AnyObject]]()
+    var words = [String]()
     var game: Game?
     var completedWords = [String]()
     
@@ -40,7 +40,14 @@ class PuzzleViewController: UIViewController {
             do {
                 let puzzleWordsData = try NSJSONSerialization.JSONObjectWithData((self.game?.puzzle)!, options: .AllowFragments) as! [String: AnyObject]
                 puzzle = puzzleWordsData["puzzle"] as! [[String]]
-                words = puzzleWordsData["words"] as! [[String: AnyObject]]
+                words = (puzzleWordsData["words"] as! [[String: AnyObject]]).map{
+                    dictionaryElement in
+                    return dictionaryElement["word"] as! String
+                    
+                }
+                
+                
+                //solutionsArray.appendContentsOf(words.objectForKey("words"))
             } catch {
                 print("Cannot parse puzzle data.")
             }
@@ -56,10 +63,9 @@ class PuzzleViewController: UIViewController {
         super.viewDidLoad()
         
         context = fetchedResultsController?.managedObjectContext
-        
+        self.configureView()
         buildSamplePuzzle()
         setPuzzleSize()
-        self.configureView()
         arrivalAnimation()
         setAnimation()
     }
@@ -102,7 +108,9 @@ class PuzzleViewController: UIViewController {
         
         //create a label to hold each letter
         let newLabel = UILabel.init(frame: labelPlacement)
-        newLabel.text = samplePuzzle[i]
+        //newLabel.text = samplePuzzle[i]
+        
+        newLabel.text = puzzle[a-1][b-1]
         newLabel.font = UIFont.systemFontOfSize(25)
         newLabel.textAlignment = .Center
         newLabel.userInteractionEnabled = true
@@ -116,9 +124,14 @@ class PuzzleViewController: UIViewController {
     
     func setPuzzleSize(){
         
+        //set width of puzzle from user input
+        var x = Int((game?.width)!)
         //change user input to int
-        var x = Int(7) //width
-        var y = Int(10) //height
+        //var x = Int(7) //width
+        
+        //set height of puzzle from user input
+        var y = Int((game?.height)!)
+        //var y = Int(10) //height
         
         //store x value for later
         let xSub = x
