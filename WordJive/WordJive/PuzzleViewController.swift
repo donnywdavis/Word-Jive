@@ -15,7 +15,7 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var selectionLabel: UILabel!
     
     
-    var currentWordLabelArray = [DataLabel]()
+    var currentWordLabelArray = [UILabel]()
     var puzzleLabelArray = [UILabel]()
     var samplePuzzle = [String]()
     var solutionsArray = [String]()
@@ -108,7 +108,6 @@ class PuzzleViewController: UIViewController {
             x = xSub
             y = y-1
             
-            
         }
     }
     
@@ -123,7 +122,7 @@ class PuzzleViewController: UIViewController {
         case .Began:
             
             
-            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? DataLabel {
+            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
                 
                 //change to expanding oval
                 subViewTouched.backgroundColor = .redColor()
@@ -136,7 +135,7 @@ class PuzzleViewController: UIViewController {
             
             
         case .Changed:
-            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? DataLabel {
+            if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
                 
                 //change to expanding oval
                 subViewTouched.backgroundColor = .redColor()
@@ -156,7 +155,7 @@ class PuzzleViewController: UIViewController {
 
                 //tag all labels with accesibitiy label "Correct"
                 for label in currentWordLabelArray{
-                    label.info = "Correct"
+                    label.accessibilityLabel = "Correct"
                     correctAnimation()
                 }
                 let currentWordIndex = solutionsArray.indexOf(currentWord)
