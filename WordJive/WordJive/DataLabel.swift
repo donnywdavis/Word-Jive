@@ -1,5 +1,5 @@
 //
-//  PuzzlePiece.swift
+//  DataLabel.swift
 //  WordJive
 //
 //  Created by Allen Spicer on 7/21/16.
@@ -8,9 +8,8 @@
 
 import UIKit
 
-class Letter: UIView {
+class DataLabel: UILabel {
     
-    var label: UILabel?
     var info: String?
 
     /*
