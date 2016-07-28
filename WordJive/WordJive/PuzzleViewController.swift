@@ -126,8 +126,8 @@ class PuzzleViewController: UIViewController {
             if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? Letter {
                 
                 //change to expanding oval
-                subViewTouched.label?.backgroundColor = .redColor()
-                subViewTouched.label?.textColor = .yellowColor()
+                subViewTouched.backgroundColor = .redColor()
+                subViewTouched.textColor = .yellowColor()
                 
                 //only append when label firing is unique
                 if currentWordLabelArray.last != subViewTouched{
@@ -139,8 +139,8 @@ class PuzzleViewController: UIViewController {
             if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? Letter {
                 
                 //change to expanding oval
-                subViewTouched.label?.backgroundColor = .redColor()
-                subViewTouched.label?.textColor = .yellowColor()
+                subViewTouched.backgroundColor = .redColor()
+                subViewTouched.textColor = .yellowColor()
                 
                 //only append when label firing is unique
                 if currentWordLabelArray.last != subViewTouched{
@@ -154,9 +154,9 @@ class PuzzleViewController: UIViewController {
             //check word against array of correct answers instead of individually
             if solutionsArray.contains(currentWord){
 
-                //tag all labels with label "Correct"
-                for letter in currentWordLabelArray{
-                    letter.identifier = "Correct"
+                //tag all labels with accesibitiy label "Correct"
+                for label in currentWordLabelArray{
+                    label.info = "Correct"
                     correctAnimation()
                 }
                 let currentWordIndex = solutionsArray.indexOf(currentWord)
@@ -167,10 +167,10 @@ class PuzzleViewController: UIViewController {
                 }
             }
             //if not already a part of a correct word erase all color changes
-            for letter in currentWordLabelArray{
-                if letter.identifier != "Correct"{
-                    letter.label?.backgroundColor = UIColor.clearColor()
-                    letter.label?.textColor = UIColor.blackColor()
+            for label in currentWordLabelArray{
+                if label.accessibilityLabel != "Correct"{
+                    label.backgroundColor = UIColor.clearColor()
+                    label.textColor = UIColor.blackColor()
                 }
             }
             currentWord = ""
