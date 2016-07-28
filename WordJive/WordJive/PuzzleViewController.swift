@@ -110,7 +110,7 @@ class PuzzleViewController: UIViewController {
         let newLabel = UILabel.init(frame: labelPlacement)
         //newLabel.text = samplePuzzle[i]
         
-        newLabel.text = puzzle[a-1][b-1]
+        newLabel.text = puzzle[b-1][a-1]
         newLabel.font = UIFont.systemFontOfSize(25)
         newLabel.textAlignment = .Center
         newLabel.userInteractionEnabled = true
@@ -124,14 +124,16 @@ class PuzzleViewController: UIViewController {
     
     func setPuzzleSize(){
         
+        //width
         //set width of puzzle from user input
-        var x = Int((game?.width)!)
+        var x = Int((game?.height)!)
         //change user input to int
-        //var x = Int(7) //width
+        //var x = Int(7)
         
+        //height
         //set height of puzzle from user input
-        var y = Int((game?.height)!)
-        //var y = Int(10) //height
+        var y = Int((game?.width)!)
+        //var y = Int(10)
         
         //store x value for later
         let xSub = x
