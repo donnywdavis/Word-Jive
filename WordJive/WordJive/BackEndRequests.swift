@@ -12,6 +12,10 @@ protocol CapabilitiesDelegate: class {
     func availableCapabilities(data: [[String: String]])
 }
 
+protocol PuzzleDelegate: class {
+    func puzzleData(data: NSData)
+}
+
 enum BackEndURLs : String {
     case Capabilities = "https://floating-taiga-20677.herokuapp.com/capabilities"
     case Puzzle = "https://floating-taiga-20677.herokuapp.com/puzzle"
@@ -20,6 +24,7 @@ enum BackEndURLs : String {
 class BackEndRequests : AnyObject {
     
     weak static var delegate: CapabilitiesDelegate?
+    weak static var puzzleDelegate: PuzzleDelegate?
     
     
     class func getCapabilities() {
@@ -58,6 +63,8 @@ class BackEndRequests : AnyObject {
             
             if (statusCode == 200) {
                 parseData(data!, urlString: urlValue!)
+            } else {
+                print("We did not get a response back. Not good. Status code: \(statusCode).")
             }
         }
         
@@ -76,12 +83,13 @@ class BackEndRequests : AnyObject {
             }
             
         case BackEndURLs.Puzzle.rawValue:
-            do {
-                let parsedData = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject]
-                print(parsedData?.description)
-            } catch {
-                print("Uh oh!")
-            }
+            puzzleDelegate?.puzzleData(data)
+//            do {
+////                let parsedData = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject]
+//                puzzleDelegate?.puzzleData(data)
+//            } catch {
+//                print("Uh oh!")
+//            }
             
         default:
             break

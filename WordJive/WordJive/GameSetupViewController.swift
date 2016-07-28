@@ -20,6 +20,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     var fetchedResultsController: NSFetchedResultsController?
     var context: NSManagedObjectContext?
     var entity: NSEntityDescription?
+    var newManagedObject: NSManagedObject?
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -37,6 +38,8 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        BackEndRequests.puzzleDelegate = self
 
         context = fetchedResultsController?.managedObjectContext
         entity = fetchedResultsController?.fetchRequest.entity!
@@ -64,7 +67,7 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     @IBAction func playButtonPushed(sender: UIButton) {
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity!.name!, inManagedObjectContext: context!)
+        newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity!.name!, inManagedObjectContext: context!)
         var dataDictionary = [String: AnyObject]()
         
         // If appropriate, configure the new managed object.
@@ -73,9 +76,9 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
             let indexPath = NSIndexPath(forRow: index, inSection: TableSections.Title.hashValue)
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SettingsTableViewCell {
                 if cell.settingTextField.text != "" {
-                    newManagedObject.setValue(cell.settingTextField.text, forKey: textFieldsArray[index]["key"]!)
+                    newManagedObject!.setValue(cell.settingTextField.text, forKey: textFieldsArray[index]["key"]!)
                 } else {
-                    newManagedObject.setValue(cell.settingTextField.placeholder, forKey: textFieldsArray[index]["key"]!)
+                    newManagedObject!.setValue(cell.settingTextField.placeholder, forKey: textFieldsArray[index]["key"]!)
                 }
             }
         }
@@ -84,31 +87,19 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
             let indexPath = NSIndexPath(forRow: index, inSection: TableSections.Options.hashValue)
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? SliderTableViewCell {
                 if cell.valueSlider.value != 0.0 {
-                    newManagedObject.setValue(Int(cell.valueSlider.value), forKey: slidersArray[index]["key"]! as! String)
+                    newManagedObject!.setValue(Int(cell.valueSlider.value), forKey: slidersArray[index]["key"]! as! String)
                     dataDictionary[slidersArray[index]["key"]! as! String] = Int(cell.valueSlider.value)
                 } else {
-                    newManagedObject.setValue(slidersArray[index]["placeholder"], forKey: slidersArray[index]["key"]! as! String)
+                    newManagedObject!.setValue(slidersArray[index]["placeholder"], forKey: slidersArray[index]["key"]! as! String)
                     dataDictionary[slidersArray[index]["key"]! as! String] = slidersArray[index]["placeholder"]
                 }
             }
         }
         
-        newManagedObject.setValue(false, forKey: "completed")
+        newManagedObject!.setValue(false, forKey: "completed")
         dataDictionary["requestCapabilities"] = selectedCapabilities
         
-        // Save the context.
-        do {
-            try context!.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //print("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
-        
         BackEndRequests.getPuzzle(dataDictionary)
-        
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -244,4 +235,24 @@ class GameSetupViewController: UIViewController, UITableViewDataSource, UITableV
         return numberOfGames
     }
 
+}
+
+extension GameSetupViewController: PuzzleDelegate {
+    func puzzleData(data: NSData) {
+        let puzzleData = data
+        
+        newManagedObject?.setValue(puzzleData, forKey: "puzzle")
+        
+        // Save the context.
+        do {
+            try context!.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //print("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
