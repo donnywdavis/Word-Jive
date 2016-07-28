@@ -183,8 +183,8 @@ class PuzzleViewController: UIViewController {
     
     
     func printLabelArrayContents(){
-        for letter in currentWordLabelArray{
-            currentWord.appendContentsOf(letter.label!.text!)
+        for label in currentWordLabelArray{
+            currentWord.appendContentsOf(label.text!)
         }
         print(currentWord)
         selectionLabel.text = currentWord
