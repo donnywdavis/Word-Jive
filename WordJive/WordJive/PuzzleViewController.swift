@@ -14,6 +14,8 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var selectionLabel: UILabel!
     
+    var fetchedResultsController: NSFetchedResultsController?
+    var context: NSManagedObjectContext?
     
     var currentWordLabelArray = [UILabel]()
     var puzzleLabelArray = [UILabel]()
@@ -24,15 +26,24 @@ class PuzzleViewController: UIViewController {
     var gravity: UIGravityBehavior!
     var animator: UIDynamicAnimator!
     var collision: UICollisionBehavior!
-    var gameItem: AnyObject? {
-        didSet {
-            // Update the view.
-            self.configureView()}}
+    var gameItem: AnyObject?
+    var puzzle = [[String]]()
+    var words = [[String: AnyObject]]()
+    var game: Game?
+    var completedWords = [String]()
     
     func configureView() {
         // Update the user interface for the detail item.
-        if let game = self.gameItem {
-            navigationController?.navigationItem.title = game.valueForKey("title") as? String
+        if let game = self.gameItem as? Game {
+            self.game = game
+            navigationController?.navigationItem.title = self.game?.title
+            do {
+                let puzzleWordsData = try NSJSONSerialization.JSONObjectWithData((self.game?.puzzle)!, options: .AllowFragments) as! [String: AnyObject]
+                puzzle = puzzleWordsData["puzzle"] as! [[String]]
+                words = puzzleWordsData["words"] as! [[String: AnyObject]]
+            } catch {
+                print("Cannot parse puzzle data.")
+            }
             
             // add other items from core data
             
@@ -43,11 +54,28 @@ class PuzzleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        context = fetchedResultsController?.managedObjectContext
+        
         buildSamplePuzzle()
         setPuzzleSize()
         self.configureView()
         arrivalAnimation()
         setAnimation()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+//        // Save the context.
+//        do {
+//            try context!.save()
+//        } catch {
+//            // Replace this implementation with code to handle the error appropriately.
+//            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            //print("Unresolved error \(error), \(error.userInfo)")
+//            abort()
+//        }
     }
     
     

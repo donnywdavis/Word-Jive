@@ -20,6 +20,8 @@
 		41B552631CEB8FC500B23ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41B552611CEB8FC500B23ED7 /* LaunchScreen.storyboard */; };
 		41B5526B1CEBCE4A00B23ED7 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5526A1CEBCE4A00B23ED7 /* SettingsTableViewCell.swift */; };
 		41B5526D1CEBD21200B23ED7 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5526C1CEBD21200B23ED7 /* CreditsViewController.swift */; };
+		41F345711D4A7081009237F5 /* Game+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F3456F1D4A7081009237F5 /* Game+CoreDataProperties.swift */; };
+		41F345721D4A7081009237F5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F345701D4A7081009237F5 /* Game.swift */; };
 		7B8839311CEBA17000C9424B /* GameSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8839301CEBA17000C9424B /* GameSetupViewController.swift */; };
 		8C27F4891CEBB2980098C56D /* BackEndRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C27F4881CEBB2980098C56D /* BackEndRequests.swift */; };
 		9F7A605A1CEBE77D0064717B /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B8839321CEBA47100C9424B /* Pacifico.ttf */; };
@@ -45,6 +47,8 @@
 		41B552641CEB8FC500B23ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B5526A1CEBCE4A00B23ED7 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		41B5526C1CEBD21200B23ED7 /* CreditsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
+		41F3456F1D4A7081009237F5 /* Game+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Game+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		41F345701D4A7081009237F5 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		7B8839301CEBA17000C9424B /* GameSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSetupViewController.swift; sourceTree = "<group>"; };
 		7B8839321CEBA47100C9424B /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		8C27F4881CEBB2980098C56D /* BackEndRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackEndRequests.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 			children = (
 				9FDE00C11D4132250000DE78 /* DataLabel.swift */,
 				41B552551CEB8FC500B23ED7 /* WordJive.xcdatamodeld */,
+				41F3456F1D4A7081009237F5 /* Game+CoreDataProperties.swift */,
+				41F345701D4A7081009237F5 /* Game.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -218,12 +224,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B8839311CEBA17000C9424B /* GameSetupViewController.swift in Sources */,
+				41F345721D4A7081009237F5 /* Game.swift in Sources */,
 				9FDE00C21D4132250000DE78 /* DataLabel.swift in Sources */,
 				41B552541CEB8FC500B23ED7 /* AppDelegate.swift in Sources */,
 				41B552571CEB8FC500B23ED7 /* WordJive.xcdatamodeld in Sources */,
 				410AE90E1CEC086E00F57029 /* CapabilitiesTableViewCell.swift in Sources */,
 				4170800D1CECDAF3008E85DC /* SliderTableViewCell.swift in Sources */,
 				41B181901CEE2D9100FE4005 /* GamesTableViewCell.swift in Sources */,
+				41F345711D4A7081009237F5 /* Game+CoreDataProperties.swift in Sources */,
 				9FB5F87C1D3A9F680091B59D /* WordsViewController.swift in Sources */,
 				41B5526D1CEBD21200B23ED7 /* CreditsViewController.swift in Sources */,
 				41B552591CEB8FC500B23ED7 /* MasterViewController.swift in Sources */,
