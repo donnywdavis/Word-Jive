@@ -125,13 +125,11 @@ class PuzzleViewController: UIViewController {
     
     func setPuzzleSize(){
         
-        //width
         //set width of puzzle from user input
         var x = Int((game?.width)!)
         //change user input to int
         //var x = Int(7)
         
-        //height
         //set height of puzzle from user input
         var y = Int((game?.height)!)
         //var y = Int(10)
