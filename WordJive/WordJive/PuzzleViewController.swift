@@ -111,7 +111,7 @@ class PuzzleViewController: UIViewController {
         let newLabel = UILabel.init(frame: labelPlacement)
         //newLabel.text = samplePuzzle[i]
         
-        newLabel.text = puzzle[a-1][b-1]
+        newLabel.text = puzzle[b-1][a-1]
         newLabel.font = UIFont.systemFontOfSize(25)
         newLabel.textAlignment = .Center
         newLabel.userInteractionEnabled = true
