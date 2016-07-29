@@ -13,6 +13,8 @@ class PuzzleViewController: UIViewController {
     
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var selectionLabel: UILabel!
+    @IBOutlet weak var definitionLabel: UILabel!
+    
     
     var fetchedResultsController: NSFetchedResultsController?
     var context: NSManagedObjectContext?
@@ -231,6 +233,16 @@ class PuzzleViewController: UIViewController {
         print(currentWord)
         selectionLabel.text = currentWord
     }
+    
+    func printNextDefinition(){
+//        if let word: String = words[0]{
+//        if UIReferenceLibraryViewController.dictionaryHasDefinitionForTerm(word) {
+//            let definition = UIReferenceLibraryViewController.init(term: word)}
+//        }
+
+    }
+    
+    
     
     
     override func didReceiveMemoryWarning() {
